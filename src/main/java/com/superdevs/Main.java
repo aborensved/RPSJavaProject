@@ -6,7 +6,9 @@ public class Main {
 
         Menu menu = new Menu();
 
-        menu.myMenu();
+        String userName = menu.createUser();
+
+        menu.myMenu(userName);
 
 
 
