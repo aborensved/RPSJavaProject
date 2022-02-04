@@ -18,8 +18,7 @@ public class TimePlayer implements MakeMove {
             "Once I tried to make a belt out of clocks. It was such a waist of time!",
             "If you annoy the clock, it might just tick off!");
 
-
-
+    // ändra till minuter
     @Override
     public String makeMove() {
         if(LocalTime.now().getHour() >= 8 && LocalTime.now().getHour() < 16) {
