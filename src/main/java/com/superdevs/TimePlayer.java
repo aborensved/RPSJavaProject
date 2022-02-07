@@ -18,19 +18,18 @@ public class TimePlayer implements MakeMove {
             "Once I tried to make a belt out of clocks. It was such a waist of time!",
             "If you annoy the clock, it might just tick off!");
 
-    // ändra till minuter
+    // Logic för val av move
     @Override
     public String makeMove() {
-        if(LocalTime.now().getHour() >= 8 && LocalTime.now().getHour() < 16) {
+        if(LocalTime.now().getMinute() <= 20) {
             return "Sax";
         }
-        if(LocalTime.now().getHour() >= 16) {
+        if(LocalTime.now().getMinute() > 20 && LocalTime.now().getMinute() <= 40) {
             return "Påse";
         }
         else {
             return "Sten";
-        }
-    }
+        }}
 
     @Override
     public String punchLine() {

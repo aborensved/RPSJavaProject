@@ -2,6 +2,8 @@ package com.superdevs;
 
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class VocalPlayer implements MakeMove {
 
@@ -13,8 +15,24 @@ public class VocalPlayer implements MakeMove {
             "Du måtte ha en livlig fantasi, Jonas, du ser så nöjd ut när du tittar dig i spegeln.",
             "Vad heter Finlands sämste boxare? Ranta Runtiringen.");
 
+    Pattern vowels = Pattern.compile("[aeiou]", Pattern.CASE_INSENSITIVE);
+
+
+
     @Override
     public String makeMove() {
+
+        for(int i = 0; i < wordList.length(); i++) {
+            int count = 0;
+            Matcher matcher = vowels.matcher(wordList.get(i));
+            while(matcher.find()){
+                count++;
+            }
+            if(count > 1) {
+                matchingWords.add(wordList.get(i));
+            }
+        }
+
         return "Move";
     }
 
