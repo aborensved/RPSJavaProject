@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 
-public class TimePlayer implements MakeMove {
+public class TimePlayer extends Player implements MakeMove {
 
     LocalTime localTime = LocalTime.now(ZoneId.of("Europe/Paris"));
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss");
@@ -18,10 +18,15 @@ public class TimePlayer implements MakeMove {
             "Once I tried to make a belt out of clocks. It was such a waist of time!",
             "If you annoy the clock, it might just tick off!");
 
+    public TimePlayer(String name) {
+        super(name);
+    }
+
     // Logic för val av move
     @Override
-    public String makeMove() {
+    public String makeMove(Player user) {
         if(LocalTime.now().getMinute() <= 20) {
+
             return "Sax";
         }
         if(LocalTime.now().getMinute() > 20 && LocalTime.now().getMinute() <= 40) {

@@ -1,5 +1,7 @@
 package com.superdevs;
 
+import java.util.Scanner;
+
 public class Player {
     String name;
     int points;
@@ -7,6 +9,37 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.points = 0;
+    }
+
+    public String makeMove(Player user) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(
+                        "Välj Sten, Sax eller Påse: " +
+                        "\n1) Sten" +
+                        "\n2) Sax" +
+                        "\n3) Påse"
+        );
+        String scannerChoice = scanner.nextLine();
+        switch (scannerChoice) {
+            case "1":
+                return "Sten";
+
+            case "2":
+                return "Sax";
+
+            case "3":
+                return "Påse";
+
+            default:
+                System.out.println("Oj något gick fel!");
+                makeMove(user);
+                break;
+        }
+        return "Intelisense ville ha en return";
+    }
+
+    public String punchLine(){
+        return "Punchline";
     }
 
     public String getName() {
