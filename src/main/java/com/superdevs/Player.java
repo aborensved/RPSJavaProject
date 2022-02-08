@@ -14,13 +14,6 @@ public class Player {
         this.points = 0;
     }
 
-    public String randomMove() {
-        Random random = new Random();
-        int upperBound = randomMoves.size() - 1;
-        int intRand = random.nextInt(upperBound);
-        return randomMoves.get(intRand);
-    }
-
     public String makeMove(Player user) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(
@@ -75,4 +68,10 @@ public class Player {
                 ", points=" + points +
                 '}';
     }
+
+    public String randomMove() {
+        Player player = new Player("Honer");
+        return makeMove(player);
+    }
+
 }

@@ -24,6 +24,7 @@ public class RandomPlayer extends Player implements MakeMove {
         Random random = new Random();
         int upperBound = randomMoves.size() - 1;
         int intRand = random.nextInt(upperBound);
+        System.out.println(punchLine());
         return randomMoves.get(intRand);
     }
 

@@ -15,6 +15,7 @@ public class VocalPlayer extends Player implements MakeMove {
             "Du måtte ha en livlig fantasi, Jonas, du ser så nöjd ut när du tittar dig i spegeln.",
             "Vad heter Finlands sämste boxare? Ranta Runtiringen.");
 
+    List<String> randomMoves = List.of("Sten", "Sax", "Påse");
     Pattern vowels = Pattern.compile("[aeiou]", Pattern.CASE_INSENSITIVE);
 
     public VocalPlayer(String name) {
@@ -32,10 +33,13 @@ public class VocalPlayer extends Player implements MakeMove {
                 count++;
             }
             if(count > 3) {
+                System.out.println(punchLine());
               return "Sten";
             }else if(count > 1) {
+                System.out.println(punchLine());
                 return "Sax";
             }else {
+                System.out.println(punchLine());
                 return "Påse";
             }
         }
@@ -50,5 +54,15 @@ public class VocalPlayer extends Player implements MakeMove {
         int intRand = random.nextInt(upperBound);
         return vokalWords.get(intRand);
     }
+
+    @Override
+    public String randomMove() {
+        Random random = new Random();
+        int upperBound = randomMoves.size() - 1;
+        int intRand = random.nextInt(upperBound);
+        System.out.println(punchLine());
+        return randomMoves.get(intRand);
+    }
+
 
 }

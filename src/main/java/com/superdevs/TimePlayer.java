@@ -26,13 +26,15 @@ public class TimePlayer extends Player implements MakeMove {
     @Override
     public String makeMove(Player user) {
         if(LocalTime.now().getMinute() <= 20) {
-
+            System.out.println(punchLine());
             return "Sax";
         }
         if(LocalTime.now().getMinute() > 20 && LocalTime.now().getMinute() <= 40) {
+            System.out.println(punchLine());
             return "Påse";
         }
         else {
+            System.out.println(punchLine());
             return "Sten";
         }}
 
@@ -43,4 +45,14 @@ public class TimePlayer extends Player implements MakeMove {
         int intRand = random.nextInt(upperBound);
         return timeWords.get(intRand);
     }
+
+    @Override
+    public String randomMove() {
+        Random random = new Random();
+        int upperBound = randomMoves.size() - 1;
+        int intRand = random.nextInt(upperBound);
+        System.out.println(punchLine());
+        return randomMoves.get(intRand);
+    }
+
 }
