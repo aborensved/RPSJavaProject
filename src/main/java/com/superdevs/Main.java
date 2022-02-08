@@ -1,6 +1,10 @@
 package com.superdevs;
 
+
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -15,26 +19,27 @@ public class Main {
         System.out.println("Ange ditt användarnamn: ");
         String userName = scanner.nextLine();
         Player user = new Player(userName);
+        //scanner.close();
 
-        drawMenu(user);
         myMenu(user);
-
 
     }
 
     public static void myMenu(Player player){
         // Meny som körs via metoden menuChoice, som tar in en int och kör igång rätt val.
-        Scanner scanner = new Scanner(System.in);
-        boolean menuBool = true;
-        while(menuBool) {
-            try {
-                int userChoice = Integer.parseInt(scanner.nextLine());
-                menuBool = menuChoice(userChoice, player);
-            } catch (NumberFormatException e) {
-                //e.printStackTrace();
+        int userChoice = 0;
+        do{
+            try{
+                drawMenu(player);
+                Scanner scanner = new Scanner(System.in);
+                userChoice = Integer.parseInt(scanner.nextLine());
+                menuChoice(userChoice, player);
+
+            }catch(NumberFormatException e){
                 System.out.println("Du angav något galet! Prova igen!");
             }
-        }
+
+        }while(userChoice != 4);
     }
 
     /** Metod som skriver ut en meny till vår simulator
@@ -49,19 +54,23 @@ public class Main {
                 "\n\nVar god ange ett val: [1 - 4] !");
     }
 
-    public static boolean menuChoice(int choice, Player player) {
+    /**
+     * Choose options from menu
+     * @param choice Integer for menu option
+     * @param player Player object
+     * */
+    public static void menuChoice(int choice, Player player) {
         System.out.println("You chose menu option " + choice);
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        pause(1500);
         // TODO lägga in korrekta metoder som skall köras
         switch (choice) {
             case 1 -> {
-                System.out.println("Hej 1");
-                //tournamentGo(Player userChar);
-
+                System.out.println("1. Play new tournament");
+                runTournament();
+                waitForPress();
+            }
+            case 2 -> {
+                System.out.println("2. Results");
                 /////
 
                 Tournament tour = new Tournament(player);
@@ -69,35 +78,53 @@ public class Main {
                 System.out.println(
                         tour.getLocalDateTime().format(dateTimeFormatter)
                 );
-                tour.getActiveUserList().stream().filter(nameId -> nameId.getNameId() == "RandomCPU").forEach(x -> x.setResult(1));
-                tour.getActiveUserList().stream().filter(nameId -> nameId.getNameId() == "RandomCPU").forEach(System.out::println);
-
+                tour.getActiveUserList().stream().filter(nameId -> Objects.equals(nameId.getNameId(), "RandomCPU")).forEach(x -> x.setResult(1));
+                tour.getActiveUserList().stream().filter(nameId -> Objects.equals(nameId.getNameId(), "RandomCPU")).forEach(System.out::println);
+                waitForPress();
                 /////
-
-                return true;
-            }
-            case 2 -> {
-                System.out.println("Hej 2");
-                Results results = new Results();
-                results.showRecentResults();
-                return false;
             }
             case 3 -> {
-                System.out.println("val 3");
+                System.out.println("3. Statistics");
                 //showStatistics();
-                return true;
+                waitForPress();
             }
             case 4 -> {
-                System.out.println("Val 4 - HEJ DÅ!");
-                //quitThisShit();
-                return false;
+                System.out.println("4. Quit Program");
+                System.out.println("Exiting program...");
+                pause(1500);
             }
             default -> {
-                System.out.println("Not ok");
-                return true;
+                System.out.println("That doesnt correspond to any valid option. Please try again: ");
             }
         }
-    }}
+    }
+
+    public static void runTournament () {
+        System.out.println("Lets get ready to rumble!!" +
+                "\nFIGHT FIGHT FIGHT!!!"
+        );
+    }
+
+    public static void pause(int milliseconds) {
+        try {
+
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // TODO Fixa input under tiden man väntar på tangentslag
+    public static void waitForPress() {
+        try {
+            System.out.println("\nPress Enter to continue...");
+            System.in.read();
+            System.out.println("\n");
+
+        } catch (IOException e){
+        }
+    }
+}
 
 
 
