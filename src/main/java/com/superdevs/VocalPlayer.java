@@ -2,8 +2,10 @@ package com.superdevs;
 
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class VocalPlayer implements MakeMove {
+public class VocalPlayer extends Player implements MakeMove {
 
     List<String> vokalWords = List.of("Det står att när de skulle göra pannkakor i fängelset använde de en fånge som smet",
             "Var kan man köpa kor billigast i världen? Korea.",
@@ -13,8 +15,31 @@ public class VocalPlayer implements MakeMove {
             "Du måtte ha en livlig fantasi, Jonas, du ser så nöjd ut när du tittar dig i spegeln.",
             "Vad heter Finlands sämste boxare? Ranta Runtiringen.");
 
+    Pattern vowels = Pattern.compile("[aeiou]", Pattern.CASE_INSENSITIVE);
+
+    public VocalPlayer(String name) {
+        super(name);
+    }
+
+
     @Override
-    public String makeMove() {
+    public String makeMove(Player user) {
+
+        for(int i = 0; i < user.getName().length(); i++) {
+            int count = 0;
+            Matcher matcher = vowels.matcher(user.getName());
+            while(matcher.find()){
+                count++;
+            }
+            if(count > 3) {
+              return "Sten";
+            }else if(count > 1) {
+                return "Sax";
+            }else {
+                return "Påse";
+            }
+        }
+
         return "Move";
     }
 
