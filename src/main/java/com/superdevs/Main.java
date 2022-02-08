@@ -2,48 +2,96 @@ package com.superdevs;
 
 
 import java.io.IOException;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        RandomPlayer randomCPU = new RandomPlayer();
-        TimePlayer timeCPU = new TimePlayer();
-        VocalPlayer vocalCPU = new VocalPlayer();
+        // Creates CPU Opponents
+        RandomPlayer randomCPU = new RandomPlayer("Random");
+        TimePlayer timeCPU = new TimePlayer("Time");
+        VocalPlayer vocalCPU = new VocalPlayer("Vowel");
+        Results results = new Results();
 
+        // Takes player input for username
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ange ditt användarnamn: ");
         String userName = scanner.nextLine();
+
+        // Creates new player based on input
         Player user = new Player(userName);
-        //scanner.close();
 
-        myMenu(user);
+        // Adds player and CPU to list for easy access
+        Contenders contendersList = new Contenders(user, randomCPU, timeCPU, vocalCPU);
 
-    }
+        Tournament tournament1 = new Tournament(contendersList);
+        pause(2000);
+        Tournament tournament2 = new Tournament(contendersList);
 
-    public static void myMenu(Player player){
-        // Meny som körs via metoden menuChoice, som tar in en int och kör igång rätt val.
+        tournament2.getActiveUserList().get(0).setResult(1);
+        tournament2.getActiveUserList().get(1).setResult(1);
+        tournament2.getActiveUserList().get(2).setResult(1);
+        tournament2.getActiveUserList().get(3).setResult(1);
+
+        results.addTournament(tournament1);
+        results.addTournament(tournament2);
+
         int userChoice = 0;
         do{
             try{
-                drawMenu(player);
-                Scanner scanner = new Scanner(System.in);
-                userChoice = Integer.parseInt(scanner.nextLine());
-                menuChoice(userChoice, player);
+                drawMenu(contendersList.getPlayer());
+                Scanner scannerMenu = new Scanner(System.in);
+                userChoice = Integer.parseInt(scannerMenu.nextLine());
+                //results.addTournament(menuChoice(userChoice, contendersList, results));
+                switch (userChoice) {
+                    case 1 -> {
+                        results.addTournament(runTournament(contendersList));
+                    waitForPress();
+                    }
+                    case 2 -> {
+                        resultLatestGame(results);
+                        waitForPress();
+                    }
+                    case 3 -> {
+                        System.out.println(
+                                results.getTournament()
+                                        .get(0)
+                                        .getActiveUserList()
+                                        .get(1)
+                                        .toString()
+                        );
+
+                        resultShit(results);
+                        waitForPress();
+                    }
+                    case 4 -> {
+                        System.out.println("4. Quit Program"
+                        + "\nExiting program...");
+                        pause(1500);
+                    }
+                    default -> {
+
+                    }
+                }
 
             }catch(NumberFormatException e){
                 System.out.println("Du angav något galet! Prova igen!");
+                System.out.println("\n");
             }
 
         }while(userChoice != 4);
+
+
     }
 
-    /** Metod som skriver ut en meny till vår simulator
-     * Tar in en instans av Player klassen */
+    /** Method that takes Player and
+     * uses the names stored in menu
+     * @param player Player object used for name access*/
     public static void drawMenu(Player player) {
         //TODO clear screen before draw menu
         System.out.println("Välkommen " + player.getName() + " till RPS Sim 2k2" +
@@ -54,55 +102,14 @@ public class Main {
                 "\n\nVar god ange ett val: [1 - 4] !");
     }
 
-    /**
-     * Choose options from menu
-     * @param choice Integer for menu option
-     * @param player Player object
-     * */
-    public static void menuChoice(int choice, Player player) {
-        System.out.println("You chose menu option " + choice);
-        pause(1500);
-        // TODO lägga in korrekta metoder som skall köras
-        switch (choice) {
-            case 1 -> {
-                System.out.println("1. Play new tournament");
-                runTournament();
-                waitForPress();
-            }
-            case 2 -> {
-                System.out.println("2. Results");
-                /////
-
-                Tournament tour = new Tournament(player);
-                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("'den' dd-MMMM-yyyy hh:mm:ss");
-                System.out.println(
-                        tour.getLocalDateTime().format(dateTimeFormatter)
-                );
-                tour.getActiveUserList().stream().filter(nameId -> Objects.equals(nameId.getNameId(), "RandomCPU")).forEach(x -> x.setResult(1));
-                tour.getActiveUserList().stream().filter(nameId -> Objects.equals(nameId.getNameId(), "RandomCPU")).forEach(System.out::println);
-                waitForPress();
-                /////
-            }
-            case 3 -> {
-                System.out.println("3. Statistics");
-                //showStatistics();
-                waitForPress();
-            }
-            case 4 -> {
-                System.out.println("4. Quit Program");
-                System.out.println("Exiting program...");
-                pause(1500);
-            }
-            default -> {
-                System.out.println("That doesnt correspond to any valid option. Please try again: ");
-            }
-        }
-    }
-
-    public static void runTournament () {
-        System.out.println("Lets get ready to rumble!!" +
-                "\nFIGHT FIGHT FIGHT!!!"
-        );
+    public static Tournament runTournament (Contenders contenderList) {
+                Tournament tournament = new Tournament(contenderList);
+        System.out.println("New Tournament Started");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("'den' dd-MMMM-yyyy hh:mm:ss");
+        tournament.getLocalDateTime().format(dateTimeFormatter);
+        tournament.getActiveUserList().stream().filter(nameId -> Objects.equals(nameId.getNameId(), "Random")).forEach(x -> x.setResult(1));
+        tournament.getActiveUserList().stream().filter(nameId -> Objects.equals(nameId.getNameId(), "Random")).forEach(System.out::println);
+        return tournament;
     }
 
     public static void pause(int milliseconds) {
@@ -124,6 +131,45 @@ public class Main {
         } catch (IOException e){
         }
     }
+
+    public static void resultLatestGame(Results resultsList) {
+        System.out.println(
+             resultsList
+                     .getTournament()
+                     .stream()
+                     .sorted(Comparator
+                             .comparing(Tournament::getLocalDateTime).reversed())
+                     .limit(1)
+                     .toList()
+        );
+    }
+
+
+
+    // genomsnitt, bästa och sämsta resultat för olika spelare.
+    public void resultStats(Results resultsList) {
+       /*DoubleSummaryStatistics bestAmdWorstResult =
+               resultsList
+                       .getTournament()
+                       .stream()
+                       .mapToDouble()
+                       .summaryStatistics();
+
+        */
+
+        //resultsList
+          //      .getTournament()
+            //    .stream()
+
+    }
+
+    public static void resultShit (Results resultsList) {
+
+        DoubleSummaryStatistics Gonzo = resultsList.getTournament().stream().mapToDouble(x -> x.getActiveUserList().get(0).getResult()).summaryStatistics();
+        System.out.println(Gonzo);
+    }
+
+
 }
 
 
