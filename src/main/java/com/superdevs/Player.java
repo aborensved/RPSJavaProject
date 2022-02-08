@@ -1,14 +1,24 @@
 package com.superdevs;
 
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
     String name;
     int points;
+    List<String> randomMoves = List.of("Sten", "Sax", "Påse");
 
     public Player(String name) {
         this.name = name;
         this.points = 0;
+    }
+
+    public String randomMove() {
+        Random random = new Random();
+        int upperBound = randomMoves.size() - 1;
+        int intRand = random.nextInt(upperBound);
+        return randomMoves.get(intRand);
     }
 
     public String makeMove(Player user) {
