@@ -14,7 +14,7 @@ public class VocalPlayer extends Player implements MakeMove {
             "Vakna Morfar! Du har glömt att ta dina sömntabletter!",
             "Du måtte ha en livlig fantasi, Jonas, du ser så nöjd ut när du tittar dig i spegeln.",
             "Vad heter Finlands sämste boxare? Ranta Runtiringen.");
-    List<String> randomMoves = List.of("Sten", "Sax", "Påse");
+    List<String> randomMoves = List.of("Påse", "Sten", "Sax");
     Pattern vowels = Pattern.compile("[aeiou]", Pattern.CASE_INSENSITIVE);
 
     public VocalPlayer(String name) {

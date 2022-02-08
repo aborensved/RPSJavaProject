@@ -78,7 +78,8 @@ public class Main {
         switch (choice) {
             case 1 -> {
                 System.out.println("1. Play new tournament");
-                runTournament(playerList);
+                ArrayList<String> tournamentResults = runTournament(playerList);
+                System.out.println(tournamentResults);
                 waitForPress();
             }
             case 2 -> {

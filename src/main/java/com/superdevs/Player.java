@@ -1,13 +1,10 @@
 package com.superdevs;
 
-import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
     String name;
     int points;
-    List<String> randomMoves = List.of("Sten", "Sax", "Påse");
 
     public Player(String name) {
         this.name = name;

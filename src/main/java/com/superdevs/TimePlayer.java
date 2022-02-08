@@ -17,7 +17,7 @@ public class TimePlayer extends Player implements MakeMove {
             "A candy that never arrives on time is a choco-late.",
             "Once I tried to make a belt out of clocks. It was such a waist of time!",
             "If you annoy the clock, it might just tick off!");
-    List<String> randomMoves = List.of("Sten", "Sax", "Påse");
+    List<String> randomMoves = List.of("Sax", "Sten", "Påse");
 
     public TimePlayer(String name) {
         super(name);

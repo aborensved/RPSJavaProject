@@ -14,6 +14,7 @@ public class RandomPlayer extends Player implements MakeMove {
             "Tyngden på dalskidan, älskling.",
             "Gott snack.");
     List<String> randomMoves = List.of("Sten", "Sax", "Påse");
+    List<String> randomMoves2 = List.of("Sax", "Påse", "Sten");
 
     public RandomPlayer(String name) {
         super(name);
@@ -33,12 +34,12 @@ public class RandomPlayer extends Player implements MakeMove {
     @Override
     public String randomMove(Player user) {
         Random randomRandom = new Random();
-        int upperBound = randomMoves.size() - 1;
+        int upperBound = randomMoves2.size() - 1;
         int intRand = randomRandom.nextInt(upperBound);
         pause(1500);
-        System.out.println("Random used: " + randomMoves.get(intRand));
+        System.out.println("Random used: " + randomMoves2.get(intRand));
         System.out.println(punchLine());
-        return randomMoves.get(intRand);
+        return randomMoves2.get(intRand);
     }
 
 
