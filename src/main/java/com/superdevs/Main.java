@@ -146,9 +146,7 @@ public class Main {
         player1.setPoints(0);
         player2.setPoints(0);
 
-        int count = 0;
-
-        while (count < 3) {
+        while (player1.getPoints() < 2 && player2.getPoints() < 2) {
 
             boolean gameOver = false;
 
@@ -175,7 +173,6 @@ public class Main {
                     if(winnerWinner.equals("player2")) {
                         player2.setPoints(player2.getPoints() + 1);
                     }
-                    count++;
                     gameOver = true;
                 } else {
                     System.out.println("Round is a draw");
