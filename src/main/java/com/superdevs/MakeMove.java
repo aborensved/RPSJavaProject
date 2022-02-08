@@ -1,7 +1,7 @@
 package com.superdevs;
 
 public interface MakeMove {
-    String randomMove();
+    String randomMove(Player user);
     String makeMove(Player user);
     String punchLine();
 }

@@ -24,16 +24,31 @@ public class RandomPlayer extends Player implements MakeMove {
         Random random = new Random();
         int upperBound = randomMoves.size() - 1;
         int intRand = random.nextInt(upperBound);
+        pause(1500);
+        System.out.println("Random used: " + randomMoves.get(intRand));
         System.out.println(punchLine());
         return randomMoves.get(intRand);
     }
 
     @Override
+    public String randomMove(Player user) {
+        Random randomRandom = new Random();
+        int upperBound = randomMoves.size() - 1;
+        int intRand = randomRandom.nextInt(upperBound);
+        pause(1500);
+        System.out.println("Random used: " + randomMoves.get(intRand));
+        System.out.println(punchLine());
+        return randomMoves.get(intRand);
+    }
+
+
+    @Override
     public String punchLine() {
-        Random random = new Random();
+        Random punchRandom = new Random();
         int upperBound = randomWords.size() - 1;
-        int intRand = random.nextInt(upperBound);
-        return randomWords.get(intRand);
+        int intRand = punchRandom.nextInt(upperBound);
+        pause(1500);
+        return "Random says: " + randomWords.get(intRand);
     }
 
 }

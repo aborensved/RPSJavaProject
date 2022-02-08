@@ -17,6 +17,7 @@ public class TimePlayer extends Player implements MakeMove {
             "A candy that never arrives on time is a choco-late.",
             "Once I tried to make a belt out of clocks. It was such a waist of time!",
             "If you annoy the clock, it might just tick off!");
+    List<String> randomMoves = List.of("Sten", "Sax", "Påse");
 
     public TimePlayer(String name) {
         super(name);
@@ -26,14 +27,20 @@ public class TimePlayer extends Player implements MakeMove {
     @Override
     public String makeMove(Player user) {
         if(LocalTime.now().getMinute() <= 20) {
+            pause(1500);
+            System.out.println("Time used: Sax");
             System.out.println(punchLine());
             return "Sax";
         }
         if(LocalTime.now().getMinute() > 20 && LocalTime.now().getMinute() <= 40) {
+            pause(1500);
+            System.out.println("Time used: Påse");
             System.out.println(punchLine());
             return "Påse";
         }
         else {
+            pause(1500);
+            System.out.println("Time used: Sten");
             System.out.println(punchLine());
             return "Sten";
         }}
@@ -43,14 +50,17 @@ public class TimePlayer extends Player implements MakeMove {
         Random random = new Random();
         int upperBound = timeWords.size() - 1;
         int intRand = random.nextInt(upperBound);
-        return timeWords.get(intRand);
+        pause(1500);
+        return "Time says: " + timeWords.get(intRand);
     }
 
     @Override
-    public String randomMove() {
-        Random random = new Random();
+    public String randomMove(Player user) {
+        Random randomRandom = new Random();
         int upperBound = randomMoves.size() - 1;
-        int intRand = random.nextInt(upperBound);
+        int intRand = randomRandom.nextInt(upperBound);
+        pause(1500);
+        System.out.println("Time used: " + randomMoves.get(intRand));
         System.out.println(punchLine());
         return randomMoves.get(intRand);
     }

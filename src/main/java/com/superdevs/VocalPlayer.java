@@ -14,7 +14,6 @@ public class VocalPlayer extends Player implements MakeMove {
             "Vakna Morfar! Du har glömt att ta dina sömntabletter!",
             "Du måtte ha en livlig fantasi, Jonas, du ser så nöjd ut när du tittar dig i spegeln.",
             "Vad heter Finlands sämste boxare? Ranta Runtiringen.");
-
     List<String> randomMoves = List.of("Sten", "Sax", "Påse");
     Pattern vowels = Pattern.compile("[aeiou]", Pattern.CASE_INSENSITIVE);
 
@@ -33,12 +32,18 @@ public class VocalPlayer extends Player implements MakeMove {
                 count++;
             }
             if(count > 3) {
+                pause(1500);
+                System.out.println("Vocal used: Sten");
                 System.out.println(punchLine());
-              return "Sten";
+                return "Sten";
             }else if(count > 1) {
+                pause(1500);
+                System.out.println("Vocal used: Sax");
                 System.out.println(punchLine());
                 return "Sax";
             }else {
+                pause(1500);
+                System.out.println("Vocal used: Påse");
                 System.out.println(punchLine());
                 return "Påse";
             }
@@ -52,14 +57,17 @@ public class VocalPlayer extends Player implements MakeMove {
         Random random = new Random();
         int upperBound = vokalWords.size() - 1;
         int intRand = random.nextInt(upperBound);
-        return vokalWords.get(intRand);
+        pause(1500);
+        return "Vocal says: " + vokalWords.get(intRand);
     }
 
     @Override
-    public String randomMove() {
-        Random random = new Random();
+    public String randomMove(Player user) {
+        Random randomRandom = new Random();
         int upperBound = randomMoves.size() - 1;
-        int intRand = random.nextInt(upperBound);
+        int intRand = randomRandom.nextInt(upperBound);
+        pause(1500);
+        System.out.println("Vocal used: " + randomMoves.get(intRand));
         System.out.println(punchLine());
         return randomMoves.get(intRand);
     }

@@ -25,12 +25,15 @@ public class Player {
         String scannerChoice = scanner.nextLine();
         switch (scannerChoice) {
             case "1":
+                System.out.println("You used: Sten");
                 return "Sten";
 
             case "2":
+                System.out.println("You used: Sax");
                 return "Sax";
 
             case "3":
+                System.out.println("You used: Påse");
                 return "Påse";
 
             default:
@@ -39,6 +42,10 @@ public class Player {
                 break;
         }
         return "Intelisense ville ha en return";
+    }
+
+    public String randomMove(Player user) {
+        return makeMove(user);
     }
 
     public String punchLine(){
@@ -61,17 +68,21 @@ public class Player {
         this.points = points;
     }
 
+    public static void pause(int milliseconds) {
+        try {
+
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
                 ", points=" + points +
                 '}';
-    }
-
-    public String randomMove() {
-        Player player = new Player("Honer");
-        return makeMove(player);
     }
 
 }
