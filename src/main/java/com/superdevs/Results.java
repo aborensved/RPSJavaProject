@@ -1,5 +1,6 @@
 package com.superdevs;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ public class Results {
     ArrayList<Tournament> tournamentArrayList;
 
     public Results() {
-        this.tournamentArrayList = new ArrayList<Tournament>();
+        this.tournamentArrayList = new ArrayList<>();
     }
 
     public ArrayList<Tournament> getTournament() {
@@ -21,8 +22,13 @@ public class Results {
         this.tournamentArrayList.add(tournament);
     }
 
-    public void showRecentResults(){
-        System.out.println("Recent results.....");
+    public void printAllScores(int index) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("'den' dd-MMMM-yyyy hh:mm:ss");
+        System.out.println( "Turneringen spelades " +
+                tournamentArrayList.get(index).getLocalDateTime().format(dateTimeFormatter)
+        );
+        tournamentArrayList.get(index).getActiveUserList().forEach(System.out::println);
     }
+
 
 }

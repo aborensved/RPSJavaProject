@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 
 /** Class that stores ActiveUserInTour for
@@ -23,7 +25,7 @@ public class Tournament {
         ActiveUserInTour tourVocalCPU = new ActiveUserInTour(contenderList.getVocalPlayer().getName(), 0);
 
         this.localDateTime = LocalDateTime.now();
-        this.activeUserList = new ArrayList<ActiveUserInTour>();
+        this.activeUserList = new ArrayList<>();
         activeUserList.add(tourPlayer);
         activeUserList.add(tourRandomCPU);
         activeUserList.add(tourTimeCPU);
@@ -33,7 +35,7 @@ public class Tournament {
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("'den' dd-MMMM-yyyy hh:mm:ss");
-        return "Last Tournament played: " +
+        return "Tournament played: " +
                 "" + localDateTime.format(dateTimeFormatter) +
                 "\n Contenders: " + activeUserList +
                 '.';
@@ -46,6 +48,9 @@ public class Tournament {
     public ArrayList<ActiveUserInTour> getActiveUserList() {
         return activeUserList;
     }
+
+
+
 
 
 

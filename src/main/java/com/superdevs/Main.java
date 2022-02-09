@@ -55,16 +55,18 @@ public class Main {
                     }
                     case 2 -> {
                         resultLatestGame(results);
+                        pause(1500);
+                        results.printAllScores(1);
                         waitForPress();
                     }
                     case 3 -> {
-                        System.out.println(
+                        /*System.out.println(
                                 results.getTournament()
                                         .get(0)
                                         .getActiveUserList()
                                         .get(1)
                                         .toString()
-                        );
+                        );*/
                         resultShit(results);
                         waitForPress();
                     }
@@ -129,7 +131,7 @@ public class Main {
 
     public static void resultLatestGame(Results resultsList) {
         System.out.println(
-             resultsList
+             "Last " + resultsList
                      .getTournament()
                      .stream()
                      .sorted(Comparator
@@ -164,7 +166,9 @@ public class Main {
         System.out.println(Gonzo);
     }
 
-
+    public static void printTournaments() {
+        System.out.println("Skiten funkar inte!!!");
+    }
 
 
 
