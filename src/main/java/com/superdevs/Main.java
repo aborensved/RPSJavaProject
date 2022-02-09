@@ -2,10 +2,8 @@ package com.superdevs;
 
 
 import java.io.IOException;
-import java.sql.Array;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -114,6 +112,8 @@ public class Main {
 
     public static ArrayList<String> runTournament(ArrayList<Object> playerList) {
 
+        Tournament1 currentTournament = new Tournament1();
+
         ArrayList<String> gameResults = new ArrayList<>();
 
         Player user = (Player) playerList.get(0);
@@ -125,123 +125,21 @@ public class Main {
         Player vocals = (Player) playerList.get(3);
 
 
-        gameResults.add(playSSP(user, random));
+        gameResults.add(Tournament1.playSSP(user, random));
         pause(3000);
-        gameResults.add(playSSP(time, vocals));
+        gameResults.add(Tournament1.playSSP(time, vocals));
         pause(3000);
-        gameResults.add(playSSP(user, time));
+        gameResults.add(Tournament1.playSSP(user, time));
         pause(3000);
-        gameResults.add(playSSP(random, vocals));
+        gameResults.add(Tournament1.playSSP(random, vocals));
         pause(3000);
-        gameResults.add(playSSP(user, vocals));
+        gameResults.add(Tournament1.playSSP(user, vocals));
         pause(3000);
-        gameResults.add(playSSP(time, random));
+        gameResults.add(Tournament1.playSSP(time, random));
         pause(3000);
 
 
-        return gameResults;
-    }
-
-    public static String playSSP(Player player1, Player player2) {
-
-        player1.setPoints(0);
-        player2.setPoints(0);
-
-        while (player1.getPoints() < 2 && player2.getPoints() < 2) {
-
-            boolean gameOver = false;
-
-            while (!gameOver) {
-
-                System.out.println("");
-                String player1Move = player1.makeMove(player2);
-                String player2Move = player2.makeMove(player1);
-
-                if(player1Move.equals(player2Move)) {
-                    pause(1500);
-                    System.out.println("Round is a draw");
-                    pause(3000);
-                    System.out.println("");
-                    player1Move = player1.randomMove(player1);
-                    player2Move = player2.randomMove(player2);
-                }
-
-                if (!player1Move.equals(player2Move)) {
-                    String winnerWinner = compareMoves(player1, player2, player1Move, player2Move);
-                    if(winnerWinner.equals("player1")) {
-                        player1.setPoints(player1.getPoints() + 1);
-                    }
-                    if(winnerWinner.equals("player2")) {
-                        player2.setPoints(player2.getPoints() + 1);
-                    }
-                    gameOver = true;
-                } else {
-                    System.out.println("Round is a draw");
-                    pause(3000);
-                }
-            }
-        }
-
-        if(player1.getPoints() > player2.getPoints()) {
-            System.out.println("\n" + player1.getName() + " Wins!\n");
-            return player1.getName();
-        }
-        if(player2.getPoints() > player1.getPoints()) {
-            System.out.println("\n" + player2.getName() + " Wins!\n");
-            return player2.getName();
-        }
-
-        return "";
-    }
-
-    public static String compareMoves(Player player1, Player player2, String player1Move, String player2Move) {
-
-        if(player1Move.equals("Sten")) {
-            if(player2Move.equals("Sax")) {
-                pause(1500);
-                System.out.println(player1.getName() + " wins the round");
-                pause(3000);
-                return "player1";
-            }
-            if(player2Move.equals("Påse")) {
-                pause(1500);
-                System.out.println(player2.getName() + " wins the round");
-                pause(3000);
-                return "player2";
-            }
-        }
-
-        if(player1Move.equals("Sax")) {
-            if(player2Move.equals("Sten")) {
-                pause(1500);
-                System.out.println(player2.getName() + " wins the round");
-                pause(3000);
-                return "player2";
-            }
-            if(player2Move.equals("Påse")) {
-                pause(1500);
-                System.out.println(player1.getName() + " wins the round");
-                pause(3000);
-                return "player1";
-            }
-        }
-
-        if(player1Move.equals("Påse")) {
-            if(player2Move.equals("Sten")) {
-                pause(1500);
-                System.out.println(player1.getName() + " wins the round");
-                pause(3000);
-                return "player1";
-            }
-            if(player2Move.equals("Sax")) {
-                pause(1500);
-                System.out.println(player2.getName() + " wins the round");
-                pause(3000);
-                return "player2";
-            }
-        }
-
-        return "";
+        return Tournament1.results(currentTournament.getLocalDate(), playerList, gameResults);
     }
 
     public static void pause(int milliseconds) {
