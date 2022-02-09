@@ -8,26 +8,26 @@ import java.util.ArrayList;
  * for review later*/
 public class Results {
 
-    ArrayList<Tournament> tournamentArrayList;
+    ArrayList<StoredTour> storedTourArrayList;
 
     public Results() {
-        this.tournamentArrayList = new ArrayList<>();
+        this.storedTourArrayList = new ArrayList<>();
     }
 
-    public ArrayList<Tournament> getTournament() {
-        return this.tournamentArrayList;
+    public ArrayList<StoredTour> getStoredTour() {
+        return this.storedTourArrayList;
     }
 
-    public void addTournament(Tournament tournament) {
-        this.tournamentArrayList.add(tournament);
+    public void addStoredTour(StoredTour storedTour) {
+        this.storedTourArrayList.add(storedTour);
     }
 
     public void printAllScores(int index) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("'den' dd-MMMM-yyyy hh:mm:ss");
         System.out.println( "Turneringen spelades " +
-                tournamentArrayList.get(index).getLocalDateTime().format(dateTimeFormatter)
+                storedTourArrayList.get(index).getLocalDateTime().format(dateTimeFormatter)
         );
-        tournamentArrayList.get(index).getActiveUserList().forEach(System.out::println);
+        storedTourArrayList.get(index).getStoredUserList().forEach(System.out::println);
     }
 
 

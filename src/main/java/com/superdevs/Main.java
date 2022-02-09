@@ -2,10 +2,9 @@ package com.superdevs;
 
 
 import java.io.IOException;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collector;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -29,17 +28,15 @@ public class Main {
         // Adds player and CPU to list for easy access
         Contenders contendersList = new Contenders(user, randomCPU, timeCPU, vocalCPU);
 
-        Tournament tournament1 = new Tournament(contendersList);
+        StoredTour storedTour1 = new StoredTour(contendersList);
         pause(2000);
-        Tournament tournament2 = new Tournament(contendersList);
+        StoredTour storedTour2 = new StoredTour(contendersList);
 
-        tournament2.getActiveUserList().forEach(x -> x.setResult(1));
+        storedTour2.getStoredUserList().forEach(x -> x.setResult(1));
         //tournament2.getActiveUserList().get(1).setResult(1);
-        //tournament2.getActiveUserList().get(2).setResult(1);
-        //tournament2.getActiveUserList().get(3).setResult(1);
 
-        results.addTournament(tournament1);
-        results.addTournament(tournament2);
+        results.addStoredTour(storedTour1);
+        results.addStoredTour(storedTour2);
 
         int userChoice = 0;
         do{
@@ -50,7 +47,7 @@ public class Main {
                 //results.addTournament(menuChoice(userChoice, contendersList, results));
                 switch (userChoice) {
                     case 1 -> {
-                        results.addTournament(runTournament(contendersList));
+                        results.addStoredTour(runTournament(contendersList));
                     waitForPress();
                     }
                     case 2 -> {
@@ -67,7 +64,8 @@ public class Main {
                                         .get(1)
                                         .toString()
                         );*/
-                        resultShit(results);
+                        statisticMenu(contendersList.getPlayer(), results);
+                        //resultShit(results,3);
                         waitForPress();
                     }
                     case 4 -> {
@@ -99,14 +97,14 @@ public class Main {
                 "\n\nVar god ange ett val: [1 - 4] !");
     }
 
-    public static Tournament runTournament (Contenders contenderList) {
-                Tournament tournament = new Tournament(contenderList);
+    public static StoredTour runTournament (Contenders contenderList) {
+                StoredTour storedTour = new StoredTour(contenderList);
         System.out.println("New Tournament Started");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("'den' dd-MMMM-yyyy hh:mm:ss");
-        tournament.getLocalDateTime().format(dateTimeFormatter);
-        tournament.getActiveUserList().stream().filter(nameId -> Objects.equals(nameId.getNameId(), "Random")).forEach(x -> x.setResult(1));
-        tournament.getActiveUserList().stream().filter(nameId -> Objects.equals(nameId.getNameId(), "Random")).forEach(System.out::println);
-        return tournament;
+        storedTour.getLocalDateTime().format(dateTimeFormatter);
+        storedTour.getStoredUserList().stream().filter(name -> Objects.equals(name.getName(), "Random")).forEach(x -> x.setResult(1));
+        storedTour.getStoredUserList().stream().filter(name -> Objects.equals(name.getName(), "Random")).forEach(System.out::println);
+        return storedTour;
     }
 
     public static void pause(int milliseconds) {
@@ -132,10 +130,10 @@ public class Main {
     public static void resultLatestGame(Results resultsList) {
         System.out.println(
              "Last " + resultsList
-                     .getTournament()
+                     .getStoredTour()
                      .stream()
                      .sorted(Comparator
-                             .comparing(Tournament::getLocalDateTime).reversed())
+                             .comparing(StoredTour::getLocalDateTime).reversed())
                      .limit(1)
                      .toList()
         );
@@ -160,14 +158,61 @@ public class Main {
 
     }
 
-    public static void resultShit (Results resultsList) {
+    public static void resultShit (Results resultsList, int index) {
 
-        DoubleSummaryStatistics Gonzo = resultsList.getTournament().stream().mapToDouble(x -> x.getActiveUserList().get(0).getResult()).summaryStatistics();
-        System.out.println(Gonzo);
+        //DoubleSummaryStatistics Gonzo = resultsList.getStoredTour().stream().mapToDouble(x -> x.getStoredUserList().get(0).getResult()).summaryStatistics();
+        DoubleSummaryStatistics gonzo2 = resultsList
+                .getStoredTour()
+                .stream()
+                .mapToDouble(x -> x.getStoredUserList()
+                        .get(index)
+                        .getResult())
+                .summaryStatistics();
+        String name = resultsList
+                .getStoredTour()
+                .get(0)
+                .getStoredUserList()
+                .get(index).getName();
+
+        System.out.println(name + " " + gonzo2.getSum() + " getsum");
+        System.out.println(name + " " + (gonzo2.getAverage() * 100)+"%" + " getAvg");
+        System.out.println(name + " " + gonzo2.getMax() + " getMax");
+        System.out.println(name + " " + gonzo2.getMin() + " getMin");
+        System.out.println(name + " " + gonzo2.getCount() + " getCount");
     }
 
     public static void printTournaments() {
         System.out.println("Skiten funkar inte!!!");
+    }
+
+    public static void statisticMenu(Player player, Results results){
+        System.out.println(
+                "Ange vilken du vill titta på: " +
+                        "\n 1." + player.getName() +
+                        "\n 2. Random" +
+                        "\n 3. Time" +
+                        "\n 4. Vowel"
+        );
+        int userChoice = 0;
+        Scanner statScanner = new Scanner(System.in);
+        userChoice = Integer.parseInt(statScanner.nextLine());
+        switch(userChoice) {
+            case 1 -> {
+
+                resultShit(results, 0);
+            }
+            case 2 -> {
+                resultShit(results, 1);
+            }
+            case 3 -> {
+                resultShit(results, 2);
+            }
+            case 4 -> {
+                resultShit(results, 3);
+            }
+        }
+
+
     }
 
 
