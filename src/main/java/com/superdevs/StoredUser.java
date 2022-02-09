@@ -4,18 +4,18 @@ package com.superdevs;
 /**
  * Class that stores name
  * and score of a given Tournament.*/
-public class ActiveUserInTour {
+public class StoredUser {
 
-    String nameId;
+    String name;
     int result;
 
-    public ActiveUserInTour(String nameId, int result) {
-        this.nameId = nameId;
+    public StoredUser(String nameId, int result) {
+        this.name = nameId;
         this.result = result;
     }
 
-    public String getNameId() {
-        return nameId;
+    public String getName() {
+        return name;
     }
 
     public int getResult() {
@@ -29,7 +29,7 @@ public class ActiveUserInTour {
     @Override
     public String toString() {
         return "" +
-                "'" + nameId + '\'' +
+                "'" + name + '\'' +
                 " no of wins = " + result +
                 ' ';
     }
