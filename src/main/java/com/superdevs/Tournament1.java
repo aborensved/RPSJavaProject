@@ -1,30 +1,34 @@
 package com.superdevs;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Tournament1 {
 
+    private LocalDateTime localDateTime;
     long date;
 
     public Tournament1() {
-        this.date = new Date().getTime();
+        this.localDateTime = LocalDateTime.now();
     }
 
     // Takes date, list of players and all the winners from the SSP-Games to make a result list
-    public static ArrayList<String> results(String date, ArrayList<Object> playerList, ArrayList<String> gameResults) {
+    public static StoredTour results(Contenders contenderList, ArrayList<String> gameResults) {
 
-        Player user = (Player) playerList.get(0);
+        ArrayList<String> gameResults2 = gameResults;
+
+        /*Player user = (Player) contenderList.getPlayer();
         user.setPoints(0);
 
-        Player random = (Player) playerList.get(1);
+        Player random = (Player) contenderList.getRandomPlayer();
         random.setPoints(0);
 
-        Player time = (Player) playerList.get(2);
+        Player time = (Player) contenderList.getTimePlayer();
         time.setPoints(0);
 
-        Player vocals = (Player) playerList.get(3);
+        Player vocals = (Player) contenderList.getVocalPlayer();
         vocals.setPoints(0);
 
         for(int i = 0; i < gameResults.size(); i++) {
@@ -40,16 +44,34 @@ public class Tournament1 {
             if(gameResults.get(i).equals(vocals.getName())) {
                 vocals.setPoints(vocals.getPoints() + 1);
             }
-        }
+        }*/
 
-        gameResults = new ArrayList<>();
+        StoredTour storeTour = new StoredTour(contenderList);
+        storeResult(gameResults2,storeTour, 0);
+        storeResult(gameResults2,storeTour, 1);
+        storeResult(gameResults2,storeTour, 2);
+        storeResult(gameResults2,storeTour, 3);
+
+/*        gameResults = new ArrayList<>();
         gameResults.add(date);
         gameResults.add(user.getName() + " " + user.getPoints());
         gameResults.add(random.getName() + " " + random.getPoints());
         gameResults.add(time.getName() + " " + time.getPoints());
-        gameResults.add(vocals.getName() + " " + vocals.getPoints());
+        gameResults.add(vocals.getName() + " " + vocals.getPoints());*/
 
-        return gameResults;
+        return storeTour;
+    }
+
+    public static void storeResult(ArrayList<String> gameResults, StoredTour storeTour, int index){
+        for(int i = 0; i < gameResults.size(); i++) {
+            if(gameResults.get(i).equals(storeTour.getStoredUserList().get(index).getName())) {
+                storeTour.getStoredUserList()
+                        .get(index).setResult(storeTour
+                                .getStoredUserList()
+                                .get(index)
+                                .getResult() + 1);
+            }
+        }
     }
 
     //Takes 2 players to play a game of SSP

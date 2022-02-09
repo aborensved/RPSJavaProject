@@ -48,6 +48,7 @@ public class Main {
                 switch (userChoice) {
                     case 1 -> {
                         results.addStoredTour(runTournament(contendersList));
+                        //results.addStoredTour(runTournament(contendersList));
                     waitForPress();
                     }
                     case 2 -> {
@@ -97,7 +98,7 @@ public class Main {
                 "\n\nVar god ange ett val: [1 - 4] !");
     }
 
-    public static StoredTour runTournament (Contenders contenderList) {
+    /*public static StoredTour runTournament (Contenders contenderList) {
                 StoredTour storedTour = new StoredTour(contenderList);
         System.out.println("New Tournament Started");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("'den' dd-MMMM-yyyy hh:mm:ss");
@@ -105,7 +106,7 @@ public class Main {
         storedTour.getStoredUserList().stream().filter(name -> Objects.equals(name.getName(), "Random")).forEach(x -> x.setResult(1));
         storedTour.getStoredUserList().stream().filter(name -> Objects.equals(name.getName(), "Random")).forEach(System.out::println);
         return storedTour;
-    }
+    }*/
 
     public static void pause(int milliseconds) {
         try {
@@ -213,6 +214,34 @@ public class Main {
         }
 
 
+    }
+
+    public static StoredTour runTournament(Contenders contenderList) {
+
+        Tournament1 currentTournament = new Tournament1();
+
+        //StoredTour newStoredTour = new StoredTour(contenderList);
+
+        ArrayList<String> gameResults = new ArrayList<>();
+        /*Player user = (Player) contenderList.get(0);
+        Player random = (Player) contenderList.get(1);
+        Player time = (Player) contenderList.get(2);
+        Player vocals = (Player) contenderList.getVocalPlayer();*/
+        gameResults.add(Tournament1.playSSP(contenderList.getPlayer(), contenderList.getRandomPlayer()));
+        pause(3000);
+        gameResults.add(Tournament1.playSSP(contenderList.getTimePlayer(), contenderList.getVocalPlayer()));
+        pause(3000);
+        gameResults.add(Tournament1.playSSP(contenderList.getPlayer(), contenderList.getTimePlayer()));
+        pause(3000);
+        gameResults.add(Tournament1.playSSP(contenderList.getRandomPlayer(), contenderList.getVocalPlayer()));
+        pause(3000);
+        gameResults.add(Tournament1.playSSP(contenderList.getPlayer(), contenderList.getVocalPlayer()));
+        pause(3000);
+        gameResults.add(Tournament1.playSSP(contenderList.getTimePlayer(), contenderList.getRandomPlayer()));
+        pause(3000);
+        StoredTour newStoredTour = Tournament1.results(contenderList, gameResults);
+        return newStoredTour;
+        //return Tournament1.results(currentTournament.getDate(), contenderList, gameResults);
     }
 
 
