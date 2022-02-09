@@ -15,36 +15,10 @@ public class Tournament1 {
     }
 
     // Takes date, list of players and all the winners from the SSP-Games to make a result list
+    // Takes List of players, and results from tournament and exports the list with updated scores.
     public static StoredTour results(Contenders contenderList, ArrayList<String> gameResults) {
 
         ArrayList<String> gameResults2 = gameResults;
-
-        /*Player user = (Player) contenderList.getPlayer();
-        user.setPoints(0);
-
-        Player random = (Player) contenderList.getRandomPlayer();
-        random.setPoints(0);
-
-        Player time = (Player) contenderList.getTimePlayer();
-        time.setPoints(0);
-
-        Player vocals = (Player) contenderList.getVocalPlayer();
-        vocals.setPoints(0);
-
-        for(int i = 0; i < gameResults.size(); i++) {
-            if(gameResults.get(i).equals(user.getName())) {
-                user.setPoints(user.getPoints() + 1);
-            }
-            if(gameResults.get(i).equals(random.getName())) {
-                random.setPoints(random.getPoints() + 1);
-            }
-            if(gameResults.get(i).equals(time.getName())) {
-                time.setPoints(time.getPoints() + 1);
-            }
-            if(gameResults.get(i).equals(vocals.getName())) {
-                vocals.setPoints(vocals.getPoints() + 1);
-            }
-        }*/
 
         StoredTour storeTour = new StoredTour(contenderList);
         storeResult(gameResults2,storeTour, 0);
@@ -52,16 +26,10 @@ public class Tournament1 {
         storeResult(gameResults2,storeTour, 2);
         storeResult(gameResults2,storeTour, 3);
 
-/*        gameResults = new ArrayList<>();
-        gameResults.add(date);
-        gameResults.add(user.getName() + " " + user.getPoints());
-        gameResults.add(random.getName() + " " + random.getPoints());
-        gameResults.add(time.getName() + " " + time.getPoints());
-        gameResults.add(vocals.getName() + " " + vocals.getPoints());*/
-
         return storeTour;
     }
 
+    //Compares resultList with names and adds score to StoredTournament object.
     public static void storeResult(ArrayList<String> gameResults, StoredTour storeTour, int index){
         for(int i = 0; i < gameResults.size(); i++) {
             if(gameResults.get(i).equals(storeTour.getStoredUserList().get(index).getName())) {

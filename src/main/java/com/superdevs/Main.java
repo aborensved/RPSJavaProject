@@ -32,9 +32,6 @@ public class Main {
         pause(2000);
         StoredTour storedTour2 = new StoredTour(contendersList);
 
-        storedTour2.getStoredUserList().forEach(x -> x.setResult(1));
-        //tournament2.getActiveUserList().get(1).setResult(1);
-
         results.addStoredTour(storedTour1);
         results.addStoredTour(storedTour2);
 
@@ -44,29 +41,18 @@ public class Main {
                 drawMenu(contendersList.getPlayer());
                 Scanner scannerMenu = new Scanner(System.in);
                 userChoice = Integer.parseInt(scannerMenu.nextLine());
-                //results.addTournament(menuChoice(userChoice, contendersList, results));
                 switch (userChoice) {
                     case 1 -> {
                         results.addStoredTour(runTournament(contendersList));
-                        //results.addStoredTour(runTournament(contendersList));
-                    waitForPress();
+                        waitForPress();
                     }
                     case 2 -> {
                         resultLatestGame(results);
                         pause(1500);
-                        results.printAllScores(1);
                         waitForPress();
                     }
                     case 3 -> {
-                        /*System.out.println(
-                                results.getTournament()
-                                        .get(0)
-                                        .getActiveUserList()
-                                        .get(1)
-                                        .toString()
-                        );*/
                         statisticMenu(contendersList.getPlayer(), results);
-                        //resultShit(results,3);
                         waitForPress();
                     }
                     case 4 -> {
@@ -97,16 +83,6 @@ public class Main {
                 "\n4. Avsluta " +
                 "\n\nVar god ange ett val: [1 - 4] !");
     }
-
-    /*public static StoredTour runTournament (Contenders contenderList) {
-                StoredTour storedTour = new StoredTour(contenderList);
-        System.out.println("New Tournament Started");
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("'den' dd-MMMM-yyyy hh:mm:ss");
-        storedTour.getLocalDateTime().format(dateTimeFormatter);
-        storedTour.getStoredUserList().stream().filter(name -> Objects.equals(name.getName(), "Random")).forEach(x -> x.setResult(1));
-        storedTour.getStoredUserList().stream().filter(name -> Objects.equals(name.getName(), "Random")).forEach(System.out::println);
-        return storedTour;
-    }*/
 
     public static void pause(int milliseconds) {
         try {
@@ -140,28 +116,8 @@ public class Main {
         );
     }
 
-
-
-    // genomsnitt, bästa och sämsta resultat för olika spelare.
-    public void resultStats(Results resultsList) {
-       /*DoubleSummaryStatistics bestAmdWorstResult =
-               resultsList
-                       .getTournament()
-                       .stream()
-                       .mapToDouble()
-                       .summaryStatistics();
-
-        */
-
-        //resultsList
-          //      .getTournament()
-            //    .stream()
-
-    }
-
     public static void resultShit (Results resultsList, int index) {
 
-        //DoubleSummaryStatistics Gonzo = resultsList.getStoredTour().stream().mapToDouble(x -> x.getStoredUserList().get(0).getResult()).summaryStatistics();
         DoubleSummaryStatistics gonzo2 = resultsList
                 .getStoredTour()
                 .stream()
@@ -199,7 +155,6 @@ public class Main {
         userChoice = Integer.parseInt(statScanner.nextLine());
         switch(userChoice) {
             case 1 -> {
-
                 resultShit(results, 0);
             }
             case 2 -> {
@@ -212,21 +167,12 @@ public class Main {
                 resultShit(results, 3);
             }
         }
-
-
     }
 
     public static StoredTour runTournament(Contenders contenderList) {
-
         Tournament1 currentTournament = new Tournament1();
-
-        //StoredTour newStoredTour = new StoredTour(contenderList);
-
         ArrayList<String> gameResults = new ArrayList<>();
-        /*Player user = (Player) contenderList.get(0);
-        Player random = (Player) contenderList.get(1);
-        Player time = (Player) contenderList.get(2);
-        Player vocals = (Player) contenderList.getVocalPlayer();*/
+
         gameResults.add(Tournament1.playSSP(contenderList.getPlayer(), contenderList.getRandomPlayer()));
         pause(3000);
         gameResults.add(Tournament1.playSSP(contenderList.getTimePlayer(), contenderList.getVocalPlayer()));
@@ -241,7 +187,6 @@ public class Main {
         pause(3000);
         StoredTour newStoredTour = Tournament1.results(contenderList, gameResults);
         return newStoredTour;
-        //return Tournament1.results(currentTournament.getDate(), contenderList, gameResults);
     }
 
 
