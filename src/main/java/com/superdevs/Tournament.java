@@ -3,21 +3,24 @@ package com.superdevs;
 
 import java.time.LocalDateTime;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
-
+/** Class that stores ActiveUserInTour for
+ * recording score, and keeps timestamp
+ * of when this Tournament took place*/
 public class Tournament {
 
     private LocalDateTime localDateTime;
     private ArrayList<ActiveUserInTour> activeUserList;
 
-    public Tournament(Player humanUser) {
+    public Tournament(Contenders contenderList) {
 
-        ActiveUserInTour tourPlayer = new ActiveUserInTour(humanUser.getName(), 0);
-        ActiveUserInTour tourRandomCPU = new ActiveUserInTour("RandomCPU", 0);
-        ActiveUserInTour tourTimeCPU = new ActiveUserInTour("TimeCPU", 0);
-        ActiveUserInTour tourVocalCPU = new ActiveUserInTour("VocalCPU", 0);
+        ActiveUserInTour tourPlayer = new ActiveUserInTour(contenderList.getPlayer().getName(), 0);
+        ActiveUserInTour tourRandomCPU = new ActiveUserInTour(contenderList.getRandomPlayer().getName(), 0);
+        ActiveUserInTour tourTimeCPU = new ActiveUserInTour(contenderList.getTimePlayer().getName(), 0);
+        ActiveUserInTour tourVocalCPU = new ActiveUserInTour(contenderList.getVocalPlayer().getName(), 0);
 
         this.localDateTime = LocalDateTime.now();
         this.activeUserList = new ArrayList<ActiveUserInTour>();
@@ -25,7 +28,15 @@ public class Tournament {
         activeUserList.add(tourRandomCPU);
         activeUserList.add(tourTimeCPU);
         activeUserList.add(tourVocalCPU);
+    }
 
+    @Override
+    public String toString() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("'den' dd-MMMM-yyyy hh:mm:ss");
+        return "Last Tournament played: " +
+                "" + localDateTime.format(dateTimeFormatter) +
+                "\n Contenders: " + activeUserList +
+                '.';
     }
 
     public LocalDateTime getLocalDateTime() {
@@ -35,5 +46,7 @@ public class Tournament {
     public ArrayList<ActiveUserInTour> getActiveUserList() {
         return activeUserList;
     }
+
+
 
 }

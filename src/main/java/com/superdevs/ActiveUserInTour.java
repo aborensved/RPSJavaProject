@@ -1,5 +1,9 @@
 package com.superdevs;
 
+
+/**
+ * Class that stores name
+ * and score of a given Tournament.*/
 public class ActiveUserInTour {
 
     String nameId;
@@ -24,10 +28,10 @@ public class ActiveUserInTour {
 
     @Override
     public String toString() {
-        return "ActiveUserInTour{" +
-                "nameId='" + nameId + '\'' +
-                ", result=" + result +
-                '}';
+        return "" +
+                "'" + nameId + '\'' +
+                " no of wins = " + result +
+                ' ';
     }
 
 }

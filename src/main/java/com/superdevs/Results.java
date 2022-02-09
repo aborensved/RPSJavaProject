@@ -1,15 +1,25 @@
 package com.superdevs;
 
+import java.util.ArrayList;
+
+/**
+ * Class that stores Tournaments
+ * for review later*/
 public class Results {
 
-    // Resultat klass innehåller en lista med turneringar.
-    // Turneringar innehåller namn plus poäng. Baserat på detta kan
-    // vi plocka ut statistik med streams.
+    ArrayList<Tournament> tournamentArrayList;
 
-    //Turneringsklass? sparar namn och poäng klocka och datum.
-    // Results klassen innehåller en lista med turneringsobjekt?
+    public Results() {
+        this.tournamentArrayList = new ArrayList<Tournament>();
+    }
 
+    public ArrayList<Tournament> getTournament() {
+        return this.tournamentArrayList;
+    }
 
+    public void addTournament(Tournament tournament) {
+        this.tournamentArrayList.add(tournament);
+    }
 
     public void showRecentResults(){
         System.out.println("Recent results.....");
