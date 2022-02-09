@@ -65,7 +65,6 @@ public class Main {
                                         .get(1)
                                         .toString()
                         );
-
                         resultShit(results);
                         waitForPress();
                     }
@@ -75,18 +74,14 @@ public class Main {
                         pause(1500);
                     }
                     default -> {
-
+                        System.out.println("Not a valid selection. Please try again (1 - 4)");
                     }
                 }
-
             }catch(NumberFormatException e){
                 System.out.println("Du angav något galet! Prova igen!");
                 System.out.println("\n");
             }
-
         }while(userChoice != 4);
-
-
     }
 
     /** Method that takes Player and
