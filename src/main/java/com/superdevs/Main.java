@@ -33,10 +33,10 @@ public class Main {
         pause(2000);
         Tournament tournament2 = new Tournament(contendersList);
 
-        tournament2.getActiveUserList().get(0).setResult(1);
-        tournament2.getActiveUserList().get(1).setResult(1);
-        tournament2.getActiveUserList().get(2).setResult(1);
-        tournament2.getActiveUserList().get(3).setResult(1);
+        tournament2.getActiveUserList().forEach(x -> x.setResult(1));
+        //tournament2.getActiveUserList().get(1).setResult(1);
+        //tournament2.getActiveUserList().get(2).setResult(1);
+        //tournament2.getActiveUserList().get(3).setResult(1);
 
         results.addTournament(tournament1);
         results.addTournament(tournament2);
@@ -168,6 +168,11 @@ public class Main {
         DoubleSummaryStatistics Gonzo = resultsList.getTournament().stream().mapToDouble(x -> x.getActiveUserList().get(0).getResult()).summaryStatistics();
         System.out.println(Gonzo);
     }
+
+
+
+
+
 
 
 }
