@@ -139,7 +139,7 @@ public class Main {
         pause(3000);
 
 
-        return Tournament1.results(currentTournament.getLocalDate(), playerList, gameResults);
+        return Tournament1.results(currentTournament.getDate(), playerList, gameResults);
     }
 
     public static void pause(int milliseconds) {

@@ -1,16 +1,19 @@
 package com.superdevs;
 
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Tournament1 {
-    LocalDate localDate;
+
+    long date;
 
     public Tournament1() {
-        this.localDate = LocalDate.now();
+        this.date = new Date().getTime();
     }
 
-    public static ArrayList<String> results(LocalDate localDate, ArrayList<Object> playerList, ArrayList<String> gameResults) {
+    // Takes date, list of players and all the winners from the SSP-Games to make a result list
+    public static ArrayList<String> results(String date, ArrayList<Object> playerList, ArrayList<String> gameResults) {
 
         Player user = (Player) playerList.get(0);
         user.setPoints(0);
@@ -40,15 +43,16 @@ public class Tournament1 {
         }
 
         gameResults = new ArrayList<>();
-        gameResults.add(localDate.toString());
+        gameResults.add(date);
         gameResults.add(user.getName() + " " + user.getPoints());
         gameResults.add(random.getName() + " " + random.getPoints());
         gameResults.add(time.getName() + " " + time.getPoints());
         gameResults.add(vocals.getName() + " " + vocals.getPoints());
-        
+
         return gameResults;
     }
 
+    //Takes 2 players to play a game of SSP
     public static String playSSP(Player player1, Player player2) {
 
         System.out.println(player1.getName() + " vs " + player2.getName());
@@ -103,6 +107,7 @@ public class Tournament1 {
         return "";
     }
 
+    // Method that compares the moves made in the SSP-Game to see who wins the round
     public static String compareMoves(Player player1, Player player2, String player1Move, String player2Move) {
 
         if(player1Move.equals("Sten")) {
@@ -153,6 +158,7 @@ public class Tournament1 {
         return "";
     }
 
+    // Method to pause program x milliseconds
     public static void pause(int milliseconds) {
         try {
 
@@ -162,15 +168,20 @@ public class Tournament1 {
         }
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
+    //Format Date
+    public String formatDate(long date) {
+        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("E yyyy.MM.dd hh:mm:ss");
+        return dateTimeFormatter.format(date);
+    }
+
+    public String getDate() {
+        return formatDate(date);
     }
 
     @Override
     public String toString() {
         return "Tournament1{" +
-                "localDate=" + localDate +
+                "date=" + date +
                 '}';
     }
-
 }
