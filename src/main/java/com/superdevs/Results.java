@@ -2,6 +2,8 @@ package com.superdevs;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Class that stores Tournaments
@@ -18,8 +20,6 @@ public class Results{
         return this.storedTourArrayList;
     }
 
-
-
     public void addStoredTour(StoredTour storedTour) {
         this.storedTourArrayList.add(storedTour);
     }
@@ -32,5 +32,13 @@ public class Results{
         storedTourArrayList.get(index).getStoredUserList().forEach(System.out::println);
     }
 
-
+    public void getPlacement (int tourNumber) {
+        storedTourArrayList
+                .get(tourNumber).
+                getStoredUserList()
+                .stream()
+                .sorted(Comparator
+                        .comparing(StoredUser::getResult).reversed())
+                .forEach(x -> System.out.println(x.getName()));
+    }
 }

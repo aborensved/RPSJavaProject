@@ -1,7 +1,6 @@
 package com.superdevs;
 
 
-
 import java.util.*;
 
 
@@ -149,6 +148,7 @@ public class Main {
                      .limit(1)
                      .toList()
         );
+
     }
 
     /** Shows various statistics from Tournaments stored in a Results object
@@ -174,14 +174,11 @@ public class Main {
                 resultsList.getStoredTour().get(0).getStoredUserList().get(0).getResult() +
                 resultsList.getStoredTour().get(0).getStoredUserList().get(0).getName()
         );
+        // Returnera lista?
+        resultsList.getPlacement(0);
+        resultsList.getPlacement(1);
 
-        //List najs= List.of(resultsList.getStoredTour().stream().map(StoredTour::getStoredUserList).toList());
-
-        //System.out.println("Test1 kommer här : " +najs);
-
-        System.out.println( resultsList.getStoredTour().get(0).getAvgPlacement(0) + resultsList.getStoredTour().get(0).getTimeOfTour()
-                );
-
+        // Kolla igenom en spelares poäng i varje turnering. Sammanställ
 
         DoubleSummaryStatistics gonzo2 = resultsList
                 .getStoredTour()
@@ -190,6 +187,7 @@ public class Main {
                         .get(index)
                         .getResult())
                 .summaryStatistics();
+
         String name = resultsList
                 .getStoredTour()
                 .get(0)
@@ -197,8 +195,7 @@ public class Main {
                 .get(index).getName();
 
         System.out.println(name + " " + gonzo2.getSum() + " getSum");
-        //System.out.println(name + " " + ((gonzo2.getMax() * 100 ) / gonzo2.getSum()) + "%" + " getAvg - max");
-        //System.out.println(name + " " + ((gonzo2.getMin() * 100) / gonzo2.getSum()) + "%" + " getAvg - min ");
+
         System.out.println(name + " " + gonzo2.getAverage() + " getAvg (getSum / getCount)");
         System.out.println(name + " " + gonzo2.getMax() + " getMax");
         System.out.println(name + " " + gonzo2.getMin() + " getMin");
@@ -225,10 +222,8 @@ public class Main {
             case 2 -> resultStatistics(results, 1);
             case 3 -> resultStatistics(results, 2);
             case 4 -> resultStatistics(results, 3);
-
         }
     }
-
 
     /** Starts a new tournament of Rock Paper Scissors (swe: Sten Sax Påse)
      *  and returns a StoredTour object.
@@ -250,8 +245,13 @@ public class Main {
         pause(1500);
         gameResults.add(Tournament1.playSSP(contenderList.getTimePlayer(), contenderList.getRandomPlayer()));
         pause(1500);
+
         return Tournament1.results(contenderList, gameResults);
     }
+
+
+
+
 
 
 

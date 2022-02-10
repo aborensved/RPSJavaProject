@@ -9,8 +9,9 @@ public class StoredUser {
     String name;
     int result;
 
-    public StoredUser(String nameId, int result) {
-        this.name = nameId;
+
+    public StoredUser(String name, int result) {
+        this.name = name;
         this.result = result;
     }
 

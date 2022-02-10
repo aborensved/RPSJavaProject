@@ -2,8 +2,8 @@ package com.superdevs;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Tournament1 {
 
@@ -19,13 +19,11 @@ public class Tournament1 {
     // from tournament and exports the list with updated scores.
     public static StoredTour results(Contenders contenderList, ArrayList<String> gameResults) {
 
-        ArrayList<String> gameResults2 = gameResults;
-
         StoredTour storeTour = new StoredTour(contenderList);
-        storeResult(gameResults2,storeTour, 0);
-        storeResult(gameResults2,storeTour, 1);
-        storeResult(gameResults2,storeTour, 2);
-        storeResult(gameResults2,storeTour, 3);
+        storeResult(gameResults,storeTour, 0);
+        storeResult(gameResults,storeTour, 1);
+        storeResult(gameResults,storeTour, 2);
+        storeResult(gameResults,storeTour, 3);
 
         return storeTour;
     }
