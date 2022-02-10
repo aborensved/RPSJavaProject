@@ -40,5 +40,7 @@ public class Results{
                 .sorted(Comparator
                         .comparing(StoredUser::getResult).reversed())
                 .forEach(x -> System.out.println(x.getName()));
+
+        //TODO Collectors.counting() se 3.2
     }
 }
