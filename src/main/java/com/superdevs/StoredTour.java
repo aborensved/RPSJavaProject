@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 
 /** Class that stores StoredUser for
@@ -32,11 +34,24 @@ public class StoredTour {
 
     @Override
     public String toString() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return "Tournament played: " +
                 localDateTime.format(dateTimeFormatter) +
                 "\n Contenders: " + storedUserList +
                 '.';
+    }
+
+    public String getTimeOfTour() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return localDateTime.format(dateTimeFormatter);
+    }
+
+    public int getAvgPlacement (int index) {
+        // Försöker skriva en sorteringsalgoritm som kan kallas via varje Tour som ger resultatet man söker för medelplacering.
+        // Tänk om! getSum / getCount ger average antal vinster per turnering, inte faktisk placering. Så vi måste
+        // Räkna om detta på något sätt.
+        storedUserList.stream().sorted(Comparator.comparing(StoredUser::getResult).reversed());
+        return storedUserList.get(index).getResult();
     }
 
     public LocalDateTime getLocalDateTime() {

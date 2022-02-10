@@ -1,10 +1,9 @@
 package com.superdevs;
 
 
-import java.io.IOException;
+
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+
 
 public class Main {
 
@@ -84,7 +83,7 @@ public class Main {
                         waitForPress();
                     }
                     case 3 -> {
-                        statisticMenu(contendersList.getPlayer(), results);
+                        statisticMenu(contendersList, results);
                         waitForPress();
                     }
                     case 4 -> {
@@ -92,9 +91,7 @@ public class Main {
                         + "\nExiting program...");
                         pause(1500);
                     }
-                    default -> {
-                        System.out.println("Not a valid selection. Please try again (1 - 4)");
-                    }
+                    default -> System.out.println("Not a valid selection. Please try again (1 - 4)");
                 }
             }catch(NumberFormatException e){
                 System.out.println("Du angav något galet! Prova igen!");
@@ -138,7 +135,7 @@ public class Main {
             System.out.println("\nPress Enter to continue...");
             waitScan.nextLine();
         } catch (NoSuchElementException e){
-
+            e.printStackTrace();
         }
     }
 
@@ -178,9 +175,12 @@ public class Main {
                 resultsList.getStoredTour().get(0).getStoredUserList().get(0).getName()
         );
 
-        List najs= List.of(resultsList.getStoredTour().stream().map(StoredTour::getStoredUserList).toList());
+        //List najs= List.of(resultsList.getStoredTour().stream().map(StoredTour::getStoredUserList).toList());
 
-        System.out.println("Test1 kommer här : " +najs);
+        //System.out.println("Test1 kommer här : " +najs);
+
+        System.out.println( resultsList.getStoredTour().get(0).getAvgPlacement(0) + resultsList.getStoredTour().get(0).getTimeOfTour()
+                );
 
 
         DoubleSummaryStatistics gonzo2 = resultsList
@@ -196,7 +196,7 @@ public class Main {
                 .getStoredUserList()
                 .get(index).getName();
 
-        System.out.println(name + " " + gonzo2.getSum() + " getsum");
+        System.out.println(name + " " + gonzo2.getSum() + " getSum");
         //System.out.println(name + " " + ((gonzo2.getMax() * 100 ) / gonzo2.getSum()) + "%" + " getAvg - max");
         //System.out.println(name + " " + ((gonzo2.getMin() * 100) / gonzo2.getSum()) + "%" + " getAvg - min ");
         System.out.println(name + " " + gonzo2.getAverage() + " getAvg (getSum / getCount)");
@@ -209,30 +209,23 @@ public class Main {
         System.out.println("Skiten funkar inte!!!");
     }
 
-    public static void statisticMenu(Player player, Results results){
+    public static void statisticMenu(Contenders contenderList, Results results){
         System.out.println(
                 "Ange vilken du vill titta på: " +
-                        "\n 1. " + player.getName() +
-                        "\n 2. Random" +
-                        "\n 3. Time" +
-                        "\n 4. Vowel"
+                        "\n 1. " + contenderList.getPlayer().getName() +
+                        "\n 2. " + contenderList.getRandomPlayer().getName() +
+                        "\n 3. " + contenderList.getTimePlayer().getName() +
+                        "\n 4. " + contenderList.getVocalPlayer().getName()
         );
-        int userChoice = 0;
+        int userChoice;
         Scanner statScanner = new Scanner(System.in);
         userChoice = Integer.parseInt(statScanner.nextLine());
         switch(userChoice) {
-            case 1 -> {
-                resultStatistics(results, 0);
-            }
-            case 2 -> {
-                resultStatistics(results, 1);
-            }
-            case 3 -> {
-                resultStatistics(results, 2);
-            }
-            case 4 -> {
-                resultStatistics(results, 3);
-            }
+            case 1 -> resultStatistics(results, 0);
+            case 2 -> resultStatistics(results, 1);
+            case 3 -> resultStatistics(results, 2);
+            case 4 -> resultStatistics(results, 3);
+
         }
     }
 
@@ -257,8 +250,7 @@ public class Main {
         pause(1500);
         gameResults.add(Tournament1.playSSP(contenderList.getTimePlayer(), contenderList.getRandomPlayer()));
         pause(1500);
-        StoredTour newStoredTour = Tournament1.results(contenderList, gameResults);
-        return newStoredTour;
+        return Tournament1.results(contenderList, gameResults);
     }
 
 
