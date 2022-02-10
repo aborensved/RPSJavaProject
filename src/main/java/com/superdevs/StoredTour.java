@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
-/** Class that stores ActiveUserInTour for
+/** Class that stores StoredUser for
  * recording score, and keeps timestamp
  * of when this Tournament took place*/
 public class StoredTour {
@@ -46,4 +46,5 @@ public class StoredTour {
     public ArrayList<StoredUser> getStoredUserList() {
         return storedUserList;
     }
+
 }

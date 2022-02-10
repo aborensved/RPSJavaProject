@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Class that stores Tournaments
  * for review later*/
-public class Results {
+public class Results{
 
     ArrayList<StoredTour> storedTourArrayList;
 
@@ -17,6 +17,8 @@ public class Results {
     public ArrayList<StoredTour> getStoredTour() {
         return this.storedTourArrayList;
     }
+
+
 
     public void addStoredTour(StoredTour storedTour) {
         this.storedTourArrayList.add(storedTour);

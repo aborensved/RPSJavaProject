@@ -32,17 +32,17 @@ public class VocalPlayer extends Player implements MakeMove {
                 count++;
             }
             if(count > 3) {
-                pause(1500);
+                pause(500);
                 System.out.println("Vocal used: Sten");
                 System.out.println(punchLine());
                 return "Sten";
             }else if(count > 1) {
-                pause(1500);
+                pause(500);
                 System.out.println("Vocal used: Sax");
                 System.out.println(punchLine());
                 return "Sax";
             }else {
-                pause(1500);
+                pause(500);
                 System.out.println("Vocal used: Påse");
                 System.out.println(punchLine());
                 return "Påse";
@@ -57,7 +57,7 @@ public class VocalPlayer extends Player implements MakeMove {
         Random random = new Random();
         int upperBound = vokalWords.size() - 1;
         int intRand = random.nextInt(upperBound);
-        pause(1500);
+        pause(500);
         return "Vocal says: " + vokalWords.get(intRand);
     }
 
@@ -66,7 +66,7 @@ public class VocalPlayer extends Player implements MakeMove {
         Random randomRandom = new Random();
         int upperBound = randomMoves.size() - 1;
         int intRand = randomRandom.nextInt(upperBound);
-        pause(1500);
+        pause(500);
         System.out.println("Vocal used: " + randomMoves.get(intRand));
         System.out.println(punchLine());
         return randomMoves.get(intRand);

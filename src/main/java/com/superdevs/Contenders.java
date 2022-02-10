@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 
 /**
- * Class used to add all players as
+ * Class used to add all player classes as
  * objects to one object
- * for use in fights*/
+ * for use in Tournaments*/
 public class Contenders {
 
     Player player;

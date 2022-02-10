@@ -15,7 +15,8 @@ public class Tournament1 {
     }
 
     // Takes date, list of players and all the winners from the SSP-Games to make a result list
-    // Takes List of players, and results from tournament and exports the list with updated scores.
+    // Takes List of players (Contender class), and results
+    // from tournament and exports the list with updated scores.
     public static StoredTour results(Contenders contenderList, ArrayList<String> gameResults) {
 
         ArrayList<String> gameResults2 = gameResults;
@@ -63,7 +64,7 @@ public class Tournament1 {
                 if(player1Move.equals(player2Move)) {
                     pause(1500);
                     System.out.println("Round is a draw");
-                    pause(3000);
+                    pause(1000);
                     System.out.println("");
                     player1Move = player1.randomMove(player1);
                     player2Move = player2.randomMove(player2);
@@ -80,7 +81,7 @@ public class Tournament1 {
                     gameOver = true;
                 } else {
                     System.out.println("Round is a draw");
-                    pause(3000);
+                    pause(1500);
                 }
             }
         }
@@ -104,13 +105,13 @@ public class Tournament1 {
             if(player2Move.equals("Sax")) {
                 pause(1500);
                 System.out.println(player1.getName() + " wins the round");
-                pause(3000);
+                pause(1000);
                 return "player1";
             }
             if(player2Move.equals("Påse")) {
                 pause(1500);
                 System.out.println(player2.getName() + " wins the round");
-                pause(3000);
+                pause(1000);
                 return "player2";
             }
         }
@@ -119,13 +120,13 @@ public class Tournament1 {
             if(player2Move.equals("Sten")) {
                 pause(1500);
                 System.out.println(player2.getName() + " wins the round");
-                pause(3000);
+                pause(1000);
                 return "player2";
             }
             if(player2Move.equals("Påse")) {
                 pause(1500);
                 System.out.println(player1.getName() + " wins the round");
-                pause(3000);
+                pause(1000);
                 return "player1";
             }
         }
@@ -134,13 +135,13 @@ public class Tournament1 {
             if(player2Move.equals("Sten")) {
                 pause(1500);
                 System.out.println(player1.getName() + " wins the round");
-                pause(3000);
+                pause(1000);
                 return "player1";
             }
             if(player2Move.equals("Sax")) {
                 pause(1500);
                 System.out.println(player2.getName() + " wins the round");
-                pause(3000);
+                pause(1000);
                 return "player2";
             }
         }
@@ -151,21 +152,10 @@ public class Tournament1 {
     // Method to pause program x milliseconds
     public static void pause(int milliseconds) {
         try {
-
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    //Format Date
-    public String formatDate(long date) {
-        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("E yyyy.MM.dd hh:mm:ss");
-        return dateTimeFormatter.format(date);
-    }
-
-    public String getDate() {
-        return formatDate(date);
     }
 
     @Override

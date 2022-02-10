@@ -27,19 +27,19 @@ public class TimePlayer extends Player implements MakeMove {
     @Override
     public String makeMove(Player user) {
         if(LocalTime.now().getMinute() <= 20) {
-            pause(1500);
+            pause(500);
             System.out.println("Time used: Sax");
             System.out.println(punchLine());
             return "Sax";
         }
         if(LocalTime.now().getMinute() > 20 && LocalTime.now().getMinute() <= 40) {
-            pause(1500);
+            pause(500);
             System.out.println("Time used: Påse");
             System.out.println(punchLine());
             return "Påse";
         }
         else {
-            pause(1500);
+            pause(500);
             System.out.println("Time used: Sten");
             System.out.println(punchLine());
             return "Sten";
@@ -50,7 +50,7 @@ public class TimePlayer extends Player implements MakeMove {
         Random random = new Random();
         int upperBound = timeWords.size() - 1;
         int intRand = random.nextInt(upperBound);
-        pause(1500);
+        pause(500);
         return "Time says: " + timeWords.get(intRand);
     }
 
@@ -59,7 +59,7 @@ public class TimePlayer extends Player implements MakeMove {
         Random randomRandom = new Random();
         int upperBound = randomMoves.size() - 1;
         int intRand = randomRandom.nextInt(upperBound);
-        pause(1500);
+        pause(500);
         System.out.println("Time used: " + randomMoves.get(intRand));
         System.out.println(punchLine());
         return randomMoves.get(intRand);

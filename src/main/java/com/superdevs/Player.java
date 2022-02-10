@@ -38,7 +38,7 @@ public class Player {
                 makeMove(user);
                 break;
         }
-        return "Intelisense ville ha en return";
+        return "Intellisense ville ha en return";
     }
 
     public String randomMove(Player user) {
