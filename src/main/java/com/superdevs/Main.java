@@ -233,6 +233,11 @@ public class Main {
         Tournament1 currentTournament = new Tournament1();
         ArrayList<String> gameResults = new ArrayList<>();
 
+        contenderList.getPlayer().setMatchesWon(0);
+        contenderList.getRandomPlayer().setMatchesWon(0);
+        contenderList.getTimePlayer().setMatchesWon(0);
+        contenderList.getVocalPlayer().setMatchesWon(0);
+
         gameResults.add(Tournament1.playSSP(contenderList.getPlayer(), contenderList.getRandomPlayer()));
         pause(1500);
         gameResults.add(Tournament1.playSSP(contenderList.getTimePlayer(), contenderList.getVocalPlayer()));
@@ -245,6 +250,8 @@ public class Main {
         pause(1500);
         gameResults.add(Tournament1.playSSP(contenderList.getTimePlayer(), contenderList.getRandomPlayer()));
         pause(1500);
+
+        Tournament1.handleGameResults(contenderList, gameResults);
 
         return Tournament1.results(contenderList, gameResults);
     }

@@ -1,9 +1,8 @@
 package com.superdevs;
 
-import java.text.SimpleDateFormat;
+import java.sql.Array;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Tournament1 {
 
@@ -41,15 +40,396 @@ public class Tournament1 {
         }
     }
 
+    public static ArrayList<String> handleGameResults(Contenders contenderList, ArrayList<String> gameResults) {
+        System.out.println("----------" + "\nGame Results:\n" + gameResults + "\n----------");
+
+        Player user = contenderList.getPlayer();
+        Player time = contenderList.getTimePlayer();
+        Player random = contenderList.getRandomPlayer();
+        Player vocal = contenderList.getVocalPlayer();
+
+        List<TourneyResults> tourneyResults = List.of(
+                new TourneyResults(user.getName(), user.getMatchesWon()),
+                new TourneyResults(time.getName(), time.getMatchesWon()),
+                new TourneyResults(random.getName(), random.getMatchesWon()),
+                new TourneyResults(vocal.getName(), vocal.getMatchesWon())
+        );
+
+        List<TourneyResults> tourneyWinner = tourneyResults
+                .stream()
+                .sorted(Comparator.comparing(TourneyResults::getMatchPoints).reversed())
+                .limit(1)
+                .toList();
+
+        List<TourneyResults> tourneySecondPlace = tourneyResults
+                .stream()
+                .sorted(Comparator.comparing(TourneyResults::getMatchPoints).reversed())
+                .skip(1)
+                .limit(1)
+                .toList();
+
+        List<TourneyResults> tourneyThirdPlace = tourneyResults
+                .stream()
+                .sorted(Comparator.comparing(TourneyResults::getMatchPoints).reversed())
+                .skip(2)
+                .limit(1)
+                .toList();
+
+        List<TourneyResults> tourneyFourthPlace = tourneyResults
+                .stream()
+                .sorted(Comparator.comparing(TourneyResults::getMatchPoints).reversed())
+                .skip(3)
+                .limit(1)
+                .toList();
+
+        ArrayList<String> firstPlace = new ArrayList<>();
+        ArrayList<String> secondPlace = new ArrayList<>();
+        ArrayList<String> thirdPlace = new ArrayList<>();
+        ArrayList<String> fourthPlace = new ArrayList<>();
+
+        boolean secondBoolean = false;
+        boolean thirdBoolean = false;
+        boolean fourthBoolean = false;
+
+        firstPlace.add(tourneyWinner.get(0).getName());
+        if(tourneyWinner.get(0).getMatchPoints() == tourneySecondPlace.get(0).getMatchPoints()) {
+            firstPlace.add(tourneySecondPlace.get(0).getName());
+            secondBoolean = true;
+            if(tourneySecondPlace.get(0).getMatchPoints() == tourneyThirdPlace.get(0).getMatchPoints()) {
+                firstPlace.add(tourneyThirdPlace.get(0).getName());
+                thirdBoolean = true;
+            }
+            if(tourneyThirdPlace.get(0).getMatchPoints() == tourneyFourthPlace.get(0).getMatchPoints()) {
+                firstPlace.add(tourneyFourthPlace.get(0).getName());
+                fourthBoolean = true;
+            }
+        }
+        if(!secondBoolean) {
+            secondPlace.add(tourneySecondPlace.get(0).getName());
+        }
+        if(tourneySecondPlace.get(0).getMatchPoints() == tourneyThirdPlace.get(0).getMatchPoints()) {
+            secondPlace.add(tourneyThirdPlace.get(0).getName());
+            thirdBoolean = true;
+            if(tourneyThirdPlace.get(0).getMatchPoints() == tourneyFourthPlace.get(0).getMatchPoints()) {
+                secondPlace.add(tourneyFourthPlace.get(0).getName());
+                fourthBoolean = true;
+            }
+        }
+        if(!thirdBoolean) {
+            thirdPlace.add(tourneyThirdPlace.get(0).getName());
+        }
+        if(tourneyThirdPlace.get(0).getMatchPoints() == tourneyFourthPlace.get(0).getMatchPoints()) {
+            thirdPlace.add(tourneyFourthPlace.get(0).getName());
+            fourthBoolean = true;
+        }
+        if(!fourthBoolean) {
+            fourthPlace.add(tourneyFourthPlace.get(0).getName());
+        }
+
+        for(int i = 0; i < firstPlace.size(); i++) {
+            if(firstPlace.get(i).equals(user.getName())) {
+                user.setFirstPlace(user.getFirstPlace() + 1);
+                if(user.getBestPlace() == 1) {
+                    user.setBestPlaceCount(user.getBestPlaceCount() + 1);
+                }
+                if(1 < user.getBestPlace()) {
+                    user.setBestPlace(1);
+                    user.setBestPlaceCount(1);
+                }
+                if(user.getWorstPlace() == 1) {
+                    user.setWorstPlaceCount(user.getWorstPlaceCount() + 1);
+                }
+                if(1 > user.getWorstPlace()) {
+                    user.setWorstPlace(1);
+                    user.setWorstPlaceCount(1);
+                }
+            }
+            if(firstPlace.get(i).equals(random.getName())) {
+                random.setFirstPlace(random.getFirstPlace() + 1);
+                if(random.getBestPlace() == 1) {
+                    random.setBestPlaceCount(random.getBestPlaceCount() + 1);
+                }
+                if(1 < random.getBestPlace()) {
+                    random.setBestPlace(1);
+                    random.setBestPlaceCount(1);
+                }
+                if(random.getWorstPlace() == 1) {
+                    random.setWorstPlaceCount(random.getWorstPlaceCount() + 1);
+                }
+                if(1 > random.getWorstPlace()) {
+                    random.setWorstPlace(1);
+                    random.setWorstPlaceCount(1);
+                }
+            }
+            if(firstPlace.get(i).equals(time.getName())) {
+                time.setFirstPlace(time.getFirstPlace() + 1);
+                if(time.getBestPlace() == 1) {
+                    time.setBestPlaceCount(time.getBestPlaceCount() + 1);
+                }
+                if(1 < time.getBestPlace()) {
+                    time.setBestPlace(1);
+                    time.setBestPlaceCount(1);
+                }
+                if(time.getWorstPlace() == 1) {
+                    time.setWorstPlaceCount(time.getWorstPlaceCount() + 1);
+                }
+                if(1 > time.getWorstPlace()) {
+                    time.setWorstPlace(1);
+                    time.setWorstPlaceCount(1);
+                }
+            }
+            if(firstPlace.get(i).equals(vocal.getName())) {
+                vocal.setFirstPlace(vocal.getFirstPlace() + 1);
+                if(vocal.getBestPlace() == 1) {
+                    vocal.setBestPlaceCount(vocal.getBestPlaceCount() + 1);
+                }
+                if(1 < vocal.getBestPlace()) {
+                    vocal.setBestPlace(1);
+                    vocal.setBestPlaceCount(1);
+                }
+                if(vocal.getWorstPlace() == 1) {
+                    vocal.setWorstPlaceCount(vocal.getWorstPlaceCount() + 1);
+                }
+                if(1 > vocal.getWorstPlace()) {
+                    vocal.setWorstPlace(1);
+                    vocal.setWorstPlaceCount(1);
+                }
+            }
+        }
+
+        for(int i = 0; i < secondPlace.size(); i++) {
+            if(secondPlace.get(i).equals(user.getName())) {
+                user.setSecondPlace(user.getSecondPlace() + 1);
+                if(user.getBestPlace() == 2) {
+                    user.setBestPlaceCount(user.getBestPlaceCount() + 1);
+                }
+                if(2 < user.getBestPlace()) {
+                    user.setBestPlace(2);
+                    user.setBestPlaceCount(1);
+                }
+                if(user.getWorstPlace() == 2) {
+                    user.setWorstPlaceCount(user.getWorstPlaceCount() + 1);
+                }
+                if(2 > user.getWorstPlace()) {
+                    user.setWorstPlace(2);
+                    user.setWorstPlaceCount(1);
+                }
+            }
+            if(secondPlace.get(i).equals(random.getName())) {
+                random.setSecondPlace(random.getSecondPlace() + 1);
+                if(random.getBestPlace() == 2) {
+                    random.setBestPlaceCount(random.getBestPlaceCount() + 1);
+                }
+                if(2 < random.getBestPlace()) {
+                    random.setBestPlace(2);
+                    random.setBestPlaceCount(1);
+                }
+                if(random.getWorstPlace() == 2) {
+                    random.setWorstPlaceCount(random.getWorstPlaceCount() + 1);
+                }
+                if(2 > random.getWorstPlace()) {
+                    random.setWorstPlace(2);
+                    random.setWorstPlaceCount(1);
+                }
+            }
+            if(secondPlace.get(i).equals(time.getName())) {
+                time.setSecondPlace(time.getSecondPlace() + 1);
+                if(time.getBestPlace() == 2) {
+                    time.setBestPlaceCount(time.getBestPlaceCount() + 1);
+                }
+                if(2 < time.getBestPlace()) {
+                    time.setBestPlace(2);
+                    time.setBestPlaceCount(1);
+                }
+                if(time.getWorstPlace() == 2) {
+                    time.setWorstPlaceCount(time.getWorstPlaceCount() + 1);
+                }
+                if(2 > time.getWorstPlace()) {
+                    time.setWorstPlace(2);
+                    time.setWorstPlaceCount(1);
+                }
+            }
+            if(secondPlace.get(i).equals(vocal.getName())) {
+                vocal.setSecondPlace(vocal.getSecondPlace() + 1);
+                if(vocal.getBestPlace() == 2) {
+                    vocal.setBestPlaceCount(vocal.getBestPlaceCount() + 1);
+                }
+                if(2 < vocal.getBestPlace()) {
+                    vocal.setBestPlace(2);
+                    vocal.setBestPlaceCount(1);
+                }
+                if(vocal.getWorstPlace() == 2) {
+                    vocal.setWorstPlaceCount(vocal.getWorstPlaceCount() + 1);
+                }
+                if(2 > vocal.getWorstPlace()) {
+                    vocal.setWorstPlace(2);
+                    vocal.setWorstPlaceCount(1);
+                }
+            }
+        }
+
+        for(int i = 0; i < thirdPlace.size(); i++) {
+            if(thirdPlace.get(i).equals(user.getName())) {
+                user.setThirdPlace(user.getThirdPlace() + 1);
+                if(user.getBestPlace() == 3) {
+                    user.setBestPlaceCount(user.getBestPlaceCount() + 1);
+                }
+                if(3 < user.getBestPlace()) {
+                    user.setBestPlace(3);
+                    user.setBestPlaceCount(1);
+                }
+                if(user.getWorstPlace() == 3) {
+                    user.setWorstPlaceCount(user.getWorstPlaceCount() + 1);
+                }
+                if(3 > user.getWorstPlace()) {
+                    user.setWorstPlace(3);
+                    user.setWorstPlaceCount(1);
+                }
+            }
+            if(thirdPlace.get(i).equals(random.getName())) {
+                random.setThirdPlace(random.getThirdPlace() + 1);
+                if(random.getBestPlace() == 3) {
+                    random.setBestPlaceCount(random.getBestPlaceCount() + 1);
+                }
+                if(3 < random.getBestPlace()) {
+                    random.setBestPlace(3);
+                    random.setBestPlaceCount(1);
+                }
+                if(random.getWorstPlace() == 3) {
+                    random.setWorstPlaceCount(random.getWorstPlaceCount() + 1);
+                }
+                if(3 > random.getWorstPlace()) {
+                    random.setWorstPlace(3);
+                    random.setWorstPlaceCount(1);
+                }
+            }
+            if(thirdPlace.get(i).equals(time.getName())) {
+                time.setThirdPlace(time.getThirdPlace() + 1);
+                if(time.getBestPlace() == 3) {
+                    time.setBestPlaceCount(time.getBestPlaceCount() + 1);
+                }
+                if(3 < time.getBestPlace()) {
+                    time.setBestPlace(3);
+                    time.setBestPlaceCount(1);
+                }
+                if(time.getWorstPlace() == 3) {
+                    time.setWorstPlaceCount(time.getWorstPlaceCount() + 1);
+                }
+                if(3 > time.getWorstPlace()) {
+                    time.setWorstPlace(3);
+                    time.setWorstPlaceCount(1);
+                }
+            }
+            if(thirdPlace.get(i).equals(vocal.getName())) {
+                vocal.setThirdPlace(vocal.getThirdPlace() + 1);
+                if(vocal.getBestPlace() == 3) {
+                    vocal.setBestPlaceCount(vocal.getBestPlaceCount() + 1);
+                }
+                if(3 < vocal.getBestPlace()) {
+                    vocal.setBestPlace(3);
+                    vocal.setBestPlaceCount(1);
+                }
+                if(vocal.getWorstPlace() == 3) {
+                    vocal.setWorstPlaceCount(vocal.getWorstPlaceCount() + 1);
+                }
+                if(3 > vocal.getWorstPlace()) {
+                    vocal.setWorstPlace(3);
+                    vocal.setWorstPlaceCount(1);
+                }
+            }
+        }
+
+        for(int i = 0; i < fourthPlace.size(); i++) {
+            if(fourthPlace.get(i).equals(user.getName())) {
+                user.setFourthPlace(user.getFourthPlace() + 1);
+                if(user.getBestPlace() == 4) {
+                    user.setBestPlaceCount(user.getBestPlaceCount() + 1);
+                }
+                if(4 < user.getBestPlace()) {
+                    user.setBestPlace(4);
+                    user.setBestPlaceCount(1);
+                }
+                if(user.getWorstPlace() == 4) {
+                    user.setWorstPlaceCount(user.getWorstPlaceCount() + 1);
+                }
+                if(4 > user.getWorstPlace()) {
+                    user.setWorstPlace(4);
+                    user.setWorstPlaceCount(1);
+                }
+            }
+            if(fourthPlace.get(i).equals(random.getName())) {
+                random.setFourthPlace(random.getFourthPlace() + 1);
+                if(random.getBestPlace() == 4) {
+                    random.setBestPlaceCount(random.getBestPlaceCount() + 1);
+                }
+                if(4 < random.getBestPlace()) {
+                    random.setBestPlace(4);
+                    random.setBestPlaceCount(1);
+                }
+                if(random.getWorstPlace() == 4) {
+                    random.setWorstPlaceCount(random.getWorstPlaceCount() + 1);
+                }
+                if(4 > random.getWorstPlace()) {
+                    random.setWorstPlace(4);
+                    random.setWorstPlaceCount(1);
+                }
+            }
+            if(fourthPlace.get(i).equals(time.getName())) {
+                time.setFourthPlace(time.getFourthPlace() + 1);
+                if(time.getBestPlace() == 4) {
+                    time.setBestPlaceCount(time.getBestPlaceCount() + 1);
+                }
+                if(4 < time.getBestPlace()) {
+                    time.setBestPlace(4);
+                    time.setBestPlaceCount(1);
+                }
+                if(time.getWorstPlace() == 4) {
+                    time.setWorstPlaceCount(time.getWorstPlaceCount() + 1);
+                }
+                if(4 > time.getWorstPlace()) {
+                    time.setWorstPlace(4);
+                    time.setWorstPlaceCount(1);
+                }
+            }
+            if(fourthPlace.get(i).equals(vocal.getName())) {
+                vocal.setFourthPlace(vocal.getFourthPlace() + 1);
+                if(vocal.getBestPlace() == 4) {
+                    vocal.setBestPlaceCount(vocal.getBestPlaceCount() + 1);
+                }
+                if(4 < vocal.getBestPlace()) {
+                    vocal.setBestPlace(4);
+                    vocal.setBestPlaceCount(1);
+                }
+                if(vocal.getWorstPlace() == 4) {
+                    vocal.setWorstPlaceCount(vocal.getWorstPlaceCount() + 1);
+                }
+                if(4 > vocal.getWorstPlace()) {
+                    vocal.setWorstPlace(4);
+                    vocal.setWorstPlaceCount(1);
+                }
+            }
+        }
+
+
+        System.out.println(user.getName() + " Best Place: " + user.getBestPlace() + ", Counter: " + user.getBestPlaceCount());
+        System.out.println(random.getName() + " Best Place: " + random.getBestPlace() + ", Counter: " + random.getBestPlaceCount());
+        System.out.println(time.getName() + " Best Place: " + time.getBestPlace() + ", Counter: " + time.getBestPlaceCount());
+        System.out.println(vocal.getName() + " Best Place: " + vocal.getBestPlace() + ", Counter: " + vocal.getBestPlaceCount());
+
+        return gameResults;
+    }
+
     //Takes 2 players to play a game of SSP
     public static String playSSP(Player player1, Player player2) {
 
         System.out.println(player1.getName() + " vs " + player2.getName());
 
-        player1.setPoints(0);
-        player2.setPoints(0);
+        player1.setMatchPoints(0);
+        player2.setMatchPoints(0);
+        player1.setMatchesPlayed(player1.getMatchesPlayed() + 1);
+        player2.setMatchesPlayed(player2.getMatchesPlayed() + 1);
 
-        while (player1.getPoints() < 2 && player2.getPoints() < 2) {
+        while (player1.getMatchPoints() < 2 && player2.getMatchPoints() < 2) {
 
             boolean gameOver = false;
 
@@ -71,10 +451,10 @@ public class Tournament1 {
                 if (!player1Move.equals(player2Move)) {
                     String winnerWinner = compareMoves(player1, player2, player1Move, player2Move);
                     if(winnerWinner.equals("player1")) {
-                        player1.setPoints(player1.getPoints() + 1);
+                        player1.setMatchPoints(player1.getMatchPoints() + 1);
                     }
                     if(winnerWinner.equals("player2")) {
-                        player2.setPoints(player2.getPoints() + 1);
+                        player2.setMatchPoints(player2.getMatchPoints() + 1);
                     }
                     gameOver = true;
                 } else {
@@ -84,12 +464,14 @@ public class Tournament1 {
             }
         }
 
-        if(player1.getPoints() > player2.getPoints()) {
-            System.out.println("\n" + player1.getName() + " Wins! " + player1.getPoints() + " vs " + player2.getPoints() + "\n");
+        if(player1.getMatchPoints() > player2.getMatchPoints()) {
+            System.out.println("\n" + player1.getName() + " Wins! " + player1.getMatchPoints() + " vs " + player2.getMatchPoints() + "\n");
+            player1.setMatchesWon(player1.getMatchesWon() + 1);
             return player1.getName();
         }
-        if(player2.getPoints() > player1.getPoints()) {
-            System.out.println("\n" + player2.getName() + " Wins! " + player2.getPoints() + " vs " + player1.getPoints() + "\n");
+        if(player2.getMatchPoints() > player1.getMatchPoints()) {
+            System.out.println("\n" + player2.getName() + " Wins! " + player2.getMatchPoints() + " vs " + player1.getMatchPoints() + "\n");
+            player2.setMatchesWon(player2.getMatchesWon() + 1);
             return player2.getName();
         }
 
