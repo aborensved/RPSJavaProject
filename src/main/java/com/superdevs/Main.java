@@ -124,8 +124,10 @@ public class Main {
                 .get(resultsList.getStoredTour().size()-1)
                 .getTimeOfTour();
 
+        String result = resultsList.getStoredTour().get(resultsList.getStoredTour().size()-1).getStoredMatchResult();
+
         System.out.println(
-                "Time from String:" + time + "Last "
+                "Last tournament was played " + time + "\nResults: " + result + "!"
 
         );
 

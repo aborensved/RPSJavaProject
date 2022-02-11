@@ -58,7 +58,7 @@ public class StoredTour {
     }
 
     public String getStoredMatchResult() {
-        return getTimeOfTour() + "" + matchResult;
+        return this.matchResult;
     }
 
     public void setStoredMatchResult(String matchResult) {

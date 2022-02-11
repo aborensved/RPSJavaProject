@@ -1,8 +1,8 @@
 package com.superdevs;
 
-import java.sql.Array;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Tournament1 {
 
@@ -24,7 +24,25 @@ public class Tournament1 {
         storeResult(gameResults,storeTour, 2);
         storeResult(gameResults,storeTour, 3);
 
+        String matchFinalResult = "";
+
+        matchFinalResult = matchFinalResult.concat(nameAndResultToString(contenderList.getPlayer(), gameResults))
+                .concat(nameAndResultToString(contenderList.getRandomPlayer(), gameResults))
+            .concat(nameAndResultToString(contenderList.getTimePlayer(), gameResults))
+                .concat(nameAndResultToString(contenderList.getVocalPlayer(), gameResults));
+
+
+        storeTour.setStoredMatchResult(matchFinalResult);
+
         return storeTour;
+    }
+
+    public static String nameAndResultToString(Player player, ArrayList<String> gameResults) {
+
+        Pattern pattern = Pattern.compile(player.getName(), Pattern.CASE_INSENSITIVE);
+        long testSum = gameResults.stream().filter(word -> pattern.matcher(word).find()).count();
+        String nameAndResult ="# " + player.getName() + " won " + testSum + " round(s) #\n";
+        return nameAndResult;
     }
 
     //Compares resultList with names and adds score to StoredTournament object.
