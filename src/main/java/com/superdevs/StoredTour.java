@@ -21,10 +21,10 @@ public class StoredTour {
 
     public StoredTour(Contenders contenderList) {
 
-        StoredUser storedPlayer = new StoredUser(contenderList.getPlayer().getName(), 0);
-        StoredUser storedRandom = new StoredUser(contenderList.getRandomPlayer().getName(), 0);
-        StoredUser storedTime = new StoredUser(contenderList.getTimePlayer().getName(), 0);
-        StoredUser storedVocal = new StoredUser(contenderList.getVocalPlayer().getName(), 0);
+        StoredUser storedPlayer = new StoredUser(contenderList.getPlayer().getName(), 0, contenderList.getPlayer().getRanking());
+        StoredUser storedRandom = new StoredUser(contenderList.getRandomPlayer().getName(), 0, contenderList.getRandomPlayer().getRanking());
+        StoredUser storedTime = new StoredUser(contenderList.getTimePlayer().getName(), 0, contenderList.getTimePlayer().getRanking());
+        StoredUser storedVocal = new StoredUser(contenderList.getVocalPlayer().getName(), 0, contenderList.getVocalPlayer().getRanking());
 
         this.localDateTime = LocalDateTime.now();
         this.storedUserList = new ArrayList<>();

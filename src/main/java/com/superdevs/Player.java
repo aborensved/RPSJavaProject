@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Player {
     String name;
+    /*
     int matchesPlayed;
     int matchesWon;
     int matchPoints;
@@ -15,9 +16,13 @@ public class Player {
     int bestPlaceCount;
     int worstPlace;
     int worstPlaceCount;
+    */
+    Ranking ranking;
 
     public Player(String name) {
         this.name = name;
+        this.ranking = new Ranking();
+        /*
         this.matchesPlayed = 0;
         this.matchesWon = 0;
         this.matchPoints = 0;
@@ -29,6 +34,7 @@ public class Player {
         this.bestPlaceCount = 0;
         this.worstPlace = 0;
         this.worstPlaceCount = 0;
+         */
     }
 
     public String makeMove(Player user) {
@@ -73,10 +79,15 @@ public class Player {
         return name;
     }
 
+    public Ranking getRanking() {
+        return ranking;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
+    /*
     public int getMatchPoints() {
         return matchPoints;
     }
@@ -164,7 +175,7 @@ public class Player {
     public void setMatchesWon(int matchesWon) {
         this.matchesWon = matchesWon;
     }
-
+    */
     public static void pause(int milliseconds) {
         try {
 
@@ -178,7 +189,7 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
-                ", matchesPlayed=" + matchesPlayed +
+                /*", matchesPlayed=" + matchesPlayed +
                 ", matchesWon=" + matchesWon +
                 ", matchPoints=" + matchPoints +
                 ", firstPlace=" + firstPlace +
@@ -188,7 +199,7 @@ public class Player {
                 ", bestPlace=" + bestPlace +
                 ", bestPlaceCount=" + bestPlaceCount +
                 ", worstPlace=" + worstPlace +
-                ", worstPlaceCount=" + worstPlaceCount +
+                ", worstPlaceCount=" + worstPlaceCount +*/
                 '}';
     }
 }

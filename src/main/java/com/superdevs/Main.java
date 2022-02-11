@@ -31,6 +31,7 @@ public class Main {
         System.out.println("* CPU Opponents generating..");
         pause(500);
         System.out.println("* Creating Tournaments..");
+        /*
         StoredTour storedTour1 = new StoredTour(contendersList);
         pause(1000);
         StoredTour storedTour2 = new StoredTour(contendersList);
@@ -38,8 +39,9 @@ public class Main {
         StoredTour storedTour3 = new StoredTour(contendersList);
         pause(1000);
         StoredTour storedTour4 = new StoredTour(contendersList);
+         */
         System.out.println("Done! Lets play!");
-
+        /*
         storedTour1.getStoredUserList().get(0).setResult(3); //Winner
         storedTour1.getStoredUserList().get(1).setResult(0);
         storedTour1.getStoredUserList().get(2).setResult(2);
@@ -60,10 +62,17 @@ public class Main {
         storedTour4.getStoredUserList().get(2).setResult(1);
         storedTour4.getStoredUserList().get(3).setResult(2);    //winner
 
+        storedTour1.getStoredUserList().get(0).getStoredRanking().setValues();
+        storedTour2.getStoredUserList().get(0).getStoredRanking().setValues();
+        storedTour3.getStoredUserList().get(0).getStoredRanking().setValues();
+        storedTour4.getStoredUserList().get(0).getStoredRanking().setValues();
+
         results.addStoredTour(storedTour1);
         results.addStoredTour(storedTour2);
         results.addStoredTour(storedTour3);
         results.addStoredTour(storedTour4);
+
+        */
 
         int userChoice = 0;
         do{
@@ -139,6 +148,8 @@ public class Main {
     }
 
     public static void resultLatestGame(Results resultsList) {
+
+
         System.out.println(
              "Last " + resultsList
                      .getStoredTour()
@@ -159,6 +170,63 @@ public class Main {
     // TODO Fix OutOfBounds exception for index
     public static void resultStatistics(Results resultsList, int index) {
 
+        ArrayList<Integer> placeList = new ArrayList<>();
+        ArrayList<Integer> placeList1 = new ArrayList<>();
+        ArrayList<Integer> placeList2 = new ArrayList<>();
+        ArrayList<Integer> placeList3 = new ArrayList<>();
+
+        for (int i = 0; i < resultsList.getStoredTour().size(); i++) {
+            placeList.add(resultsList.getStoredTour().get(i).getStoredUserList().get(0).getStoredRanking().getFirstPlace());
+            //placeList.add(resultsList.getStoredTour().stream()m .get(i).getStoredUserList().get(0).getStoredRanking().getFirstPlace());
+        }
+        //DoubleSummaryStatistics showMeLife = placeList.stream().mapToDouble(Integer::doubleValue).summaryStatistics();
+        DoubleSummaryStatistics showMeLife = resultsList
+                .getStoredTour()
+                .stream()
+                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
+                .limit(1)
+                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getFirstPlace())
+                .summaryStatistics();
+
+        for (int i = 0; i < resultsList.getStoredTour().size(); i++) {
+            placeList1.add(resultsList.getStoredTour().get(i).getStoredUserList().get(0).getStoredRanking().getSecondPlace());
+        }
+        //DoubleSummaryStatistics showMeLife2 = placeList.stream().mapToDouble(Integer::doubleValue).summaryStatistics();
+        DoubleSummaryStatistics showMeLife2 = resultsList
+                .getStoredTour()
+                .stream()
+                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
+                .limit(1)
+                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getSecondPlace())
+                .summaryStatistics();
+
+        for (int i = 0; i < resultsList.getStoredTour().size(); i++) {
+            placeList2.add(resultsList.getStoredTour().get(i).getStoredUserList().get(0).getStoredRanking().getThirdPlace());
+        }
+        //DoubleSummaryStatistics showMeLife3 = placeList.stream().mapToDouble(Integer::doubleValue).summaryStatistics();
+        DoubleSummaryStatistics showMeLife3 = resultsList
+                .getStoredTour()
+                .stream()
+                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
+                .limit(1)
+                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getThirdPlace())
+                .summaryStatistics();
+        for (int i = 0; i < resultsList.getStoredTour().size(); i++) {
+            placeList3.add(resultsList.getStoredTour().get(i).getStoredUserList().get(0).getStoredRanking().getFourthPlace());
+        }
+        //DoubleSummaryStatistics showMeLife4 = placeList.stream().mapToDouble(Integer::doubleValue).summaryStatistics();
+        DoubleSummaryStatistics showMeLife4 = resultsList
+                .getStoredTour()
+                .stream()
+                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
+                .limit(1)
+                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getFourthPlace())
+                .summaryStatistics();
+
+        System.out.println("getFirstPlace ###" + showMeLife);
+        System.out.println("getSecondPlace " + showMeLife2);
+        System.out.println("getThirdPlace " + showMeLife3);
+        System.out.println("getFourthPlace " + showMeLife4);
 
         //  Programmet skall sedan kunna visa statistik om olika spelares snittplacering i turneringen,
         //  bästa placering samt sämsta placering
@@ -176,7 +244,7 @@ public class Main {
         );
         // Returnera lista?
         resultsList.getPlacement(0);
-        resultsList.getPlacement(1);
+
 
         // Kolla igenom en spelares poäng i varje turnering. Sammanställ
 
@@ -233,27 +301,25 @@ public class Main {
         Tournament1 currentTournament = new Tournament1();
         ArrayList<String> gameResults = new ArrayList<>();
 
-        contenderList.getPlayer().setMatchesWon(0);
-        contenderList.getRandomPlayer().setMatchesWon(0);
-        contenderList.getTimePlayer().setMatchesWon(0);
-        contenderList.getVocalPlayer().setMatchesWon(0);
+        contenderList.getPlayer().getRanking().setMatchesWon(0);
+        contenderList.getRandomPlayer().getRanking().setMatchesWon(0);
+        contenderList.getTimePlayer().getRanking().setMatchesWon(0);
+        contenderList.getVocalPlayer().getRanking().setMatchesWon(0);
 
         gameResults.add(Tournament1.playSSP(contenderList.getPlayer(), contenderList.getRandomPlayer()));
-        pause(1500);
+        pause(100);
         gameResults.add(Tournament1.playSSP(contenderList.getTimePlayer(), contenderList.getVocalPlayer()));
-        pause(1500);
+        pause(100);
         gameResults.add(Tournament1.playSSP(contenderList.getPlayer(), contenderList.getTimePlayer()));
-        pause(1500);
+        pause(100);
         gameResults.add(Tournament1.playSSP(contenderList.getRandomPlayer(), contenderList.getVocalPlayer()));
-        pause(1500);
+        pause(100);
         gameResults.add(Tournament1.playSSP(contenderList.getPlayer(), contenderList.getVocalPlayer()));
-        pause(1500);
+        pause(100);
         gameResults.add(Tournament1.playSSP(contenderList.getTimePlayer(), contenderList.getRandomPlayer()));
-        pause(1500);
+        pause(100);
 
-        Tournament1.handleGameResults(contenderList, gameResults);
-
-        return Tournament1.results(contenderList, gameResults);
+        return Tournament1.results(contenderList, Tournament1.handleGameResults(contenderList, gameResults));
     }
 
 
