@@ -537,9 +537,6 @@ public class Tournament1 {
         }
     }
 
-
-
-
     //Takes 2 players to play a game of SSP
     public static String playSSP(Player player1, Player player2) {
 

@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class StoredTour {
 
     private LocalDateTime localDateTime;
+    private String matchResult;
     private ArrayList<StoredUser> storedUserList;
 
     public StoredTour(Contenders contenderList) {
@@ -27,6 +28,7 @@ public class StoredTour {
         StoredUser storedVocal = new StoredUser(contenderList.getVocalPlayer().getName(), 0, contenderList.getVocalPlayer().getRanking());
 
         this.localDateTime = LocalDateTime.now();
+        this.matchResult = "No match recorded";
         this.storedUserList = new ArrayList<>();
         storedUserList.add(storedPlayer);
         storedUserList.add(storedRandom);
@@ -53,6 +55,14 @@ public class StoredTour {
 
     public ArrayList<StoredUser> getStoredUserList() {
         return storedUserList;
+    }
+
+    public String getStoredMatchResult() {
+        return getTimeOfTour() + "" + matchResult;
+    }
+
+    public void setStoredMatchResult(String matchResult) {
+        this.matchResult = matchResult;
     }
 
 }

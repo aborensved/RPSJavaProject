@@ -4,37 +4,12 @@ import java.util.Scanner;
 
 public class Player {
     String name;
-    /*
-    int matchesPlayed;
-    int matchesWon;
-    int matchPoints;
-    int firstPlace;
-    int secondPlace;
-    int thirdPlace;
-    int fourthPlace;
-    int bestPlace;
-    int bestPlaceCount;
-    int worstPlace;
-    int worstPlaceCount;
-    */
     Ranking ranking;
 
     public Player(String name) {
         this.name = name;
         this.ranking = new Ranking();
-        /*
-        this.matchesPlayed = 0;
-        this.matchesWon = 0;
-        this.matchPoints = 0;
-        this.firstPlace = 0;
-        this.secondPlace = 0;
-        this.thirdPlace = 0;
-        this.fourthPlace = 0;
-        this.bestPlace = 4;
-        this.bestPlaceCount = 0;
-        this.worstPlace = 0;
-        this.worstPlaceCount = 0;
-         */
+
     }
 
     public String makeMove(Player user) {
@@ -87,95 +62,6 @@ public class Player {
         this.name = name;
     }
 
-    /*
-    public int getMatchPoints() {
-        return matchPoints;
-    }
-
-    public int getFirstPlace() {
-        return firstPlace;
-    }
-
-    public int getSecondPlace() {
-        return secondPlace;
-    }
-
-    public int getThirdPlace() {
-        return thirdPlace;
-    }
-
-    public int getFourthPlace() {
-        return fourthPlace;
-    }
-
-    public int getMatchesPlayed() {
-        return matchesPlayed;
-    }
-
-    public int getBestPlace() {
-        return bestPlace;
-    }
-
-    public int getBestPlaceCount() {
-        return bestPlaceCount;
-    }
-
-    public int getWorstPlace() {
-        return worstPlace;
-    }
-
-    public int getWorstPlaceCount() {
-        return worstPlaceCount;
-    }
-
-    public int getMatchesWon() {
-        return matchesWon;
-    }
-
-    public void setMatchPoints(int matchPoints) {
-        this.matchPoints = matchPoints;
-    }
-
-    public void setFirstPlace(int firstPlace) {
-        this.firstPlace = firstPlace;
-    }
-
-    public void setSecondPlace(int secondPlace) {
-        this.secondPlace = secondPlace;
-    }
-
-    public void setThirdPlace(int thirdPlace) {
-        this.thirdPlace = thirdPlace;
-    }
-
-    public void setFourthPlace(int fourthPlace) {
-        this.fourthPlace = fourthPlace;
-    }
-
-    public void setMatchesPlayed(int matchesPlayed) {
-        this.matchesPlayed = matchesPlayed;
-    }
-
-    public void setBestPlace(int bestPlace) {
-        this.bestPlace = bestPlace;
-    }
-
-    public void setBestPlaceCount(int bestPlaceCount) {
-        this.bestPlaceCount = bestPlaceCount;
-    }
-
-    public void setWorstPlace(int worstPlace) {
-        this.worstPlace = worstPlace;
-    }
-
-    public void setWorstPlaceCount(int worstPlaceCount) {
-        this.worstPlaceCount = worstPlaceCount;
-    }
-
-    public void setMatchesWon(int matchesWon) {
-        this.matchesWon = matchesWon;
-    }
-    */
     public static void pause(int milliseconds) {
         try {
 
@@ -189,17 +75,7 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
-                /*", matchesPlayed=" + matchesPlayed +
-                ", matchesWon=" + matchesWon +
-                ", matchPoints=" + matchPoints +
-                ", firstPlace=" + firstPlace +
-                ", secondPlace=" + secondPlace +
-                ", thirdPlace=" + thirdPlace +
-                ", fourthPlace=" + fourthPlace +
-                ", bestPlace=" + bestPlace +
-                ", bestPlaceCount=" + bestPlaceCount +
-                ", worstPlace=" + worstPlace +
-                ", worstPlaceCount=" + worstPlaceCount +*/
+
                 '}';
     }
 }
