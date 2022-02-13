@@ -9,10 +9,10 @@ import java.util.ArrayList;
  * for use in Tournaments*/
 public class Contenders {
 
-    Player player;
-    RandomPlayer randomPlayer;
-    TimePlayer timePlayer;
-    VocalPlayer vocalPlayer;
+    private Player player;
+    private RandomPlayer randomPlayer;
+    private TimePlayer timePlayer;
+    private VocalPlayer vocalPlayer;
 
     public Contenders(Player player, RandomPlayer randomPlayer, TimePlayer timePlayer, VocalPlayer vocalPlayer) {
         this.player = player;

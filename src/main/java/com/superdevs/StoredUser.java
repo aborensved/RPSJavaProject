@@ -41,38 +41,6 @@ public class StoredUser{
                 return (result / (matches/3));
     }
 
-    // TODO Remove before final version. Debugging use only
-    public void setTournamentStats(int placement) {
-        this.storedRanking.setMatchesPlayed(storedRanking.getMatchesPlayed()+3);
-        //matchesWon=1
-        this.storedRanking.setMatchesWon(storedRanking.getMatchesWon()+1);
-        //matchPoints=1
-
-        if (placement == 1){
-            //firstPlace=1
-            this.storedRanking.setFirstPlace(storedRanking.getFirstPlace()+1);
-        }
-        if (placement == 2) {
-            //secondPlace=0
-            this.storedRanking.setSecondPlace(storedRanking.getSecondPlace()+1);
-        }
-        if (placement == 3) {
-            //thirdPlace=1
-            this.storedRanking.setThirdPlace(storedRanking.getThirdPlace()+1);
-        }
-        if (placement == 4) {
-            //fourthPlace=0
-            this.storedRanking.setFourthPlace(storedRanking.getFourthPlace()+1);
-        }
-        //bestPlace=1
-
-        this.storedRanking.setBestPlace(1);
-        //bestPlaceCount=1
-        //worstPlace=3
-        this.storedRanking.setWorstPlace(4);
-        //worstPlaceCount=1}
-    }
-
     @Override
     public String toString() {
         return  "'" + name + '\'' +

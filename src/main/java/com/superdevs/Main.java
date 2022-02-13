@@ -250,9 +250,10 @@ public class Main {
     }
 
     public static void averageScore(Results resultsList) {
-        int indexForArvid = resultsList.getStoredTour().size()-1;
+        //TODO Check for 0 if no tournament is played!!!
+        int indexForAverageLatestGame = resultsList.getStoredTour().size()-1;
         int userIndex = 0;
-        System.out.println("Average placement in Tours: " + Math.round(resultsList.getStoredTour().get(indexForArvid).getStoredUserList().get(userIndex).getCombinedScore()));
+        System.out.println("Average placement in Tours: " + Math.round(resultsList.getStoredTour().get(indexForAverageLatestGame).getStoredUserList().get(userIndex).getCombinedScore()));
     }
 
 
@@ -273,9 +274,9 @@ public class Main {
         userChoice = Integer.parseInt(statScanner.nextLine());
         switch(userChoice) {
             case 1 -> resultStatistics2(results, 0);
-            case 2 -> resultStatistics(results, 1);
-            case 3 -> resultStatistics(results, 2);
-            case 4 -> resultStatistics(results, 3);
+            case 2 -> resultStatistics2(results, 1);
+            case 3 -> resultStatistics2(results, 2);
+            case 4 -> resultStatistics2(results, 3);
         }
     }
 

@@ -9,7 +9,7 @@ import java.util.Comparator;
  * for review later*/
 public class Results{
 
-    ArrayList<StoredTour> storedTourArrayList;
+    private ArrayList<StoredTour> storedTourArrayList;
 
     public Results() {
         this.storedTourArrayList = new ArrayList<>();
@@ -23,6 +23,8 @@ public class Results{
         this.storedTourArrayList.add(storedTour);
     }
 
+
+    // Time to remove? Deprecated
     public void printAllScores(int index) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("'den' dd-MMMM-yyyy hh:mm:ss");
         System.out.println( "Turneringen spelades " +
@@ -31,6 +33,7 @@ public class Results{
         storedTourArrayList.get(index).getStoredUserList().forEach(System.out::println);
     }
 
+    // Deprecated method that prints out placement in a tournament.
     public void getPlacement (int tourNumber) {
         storedTourArrayList
                 .get(tourNumber).

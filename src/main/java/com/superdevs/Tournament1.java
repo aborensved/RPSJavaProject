@@ -24,23 +24,30 @@ public class Tournament1 {
         storeResult(gameResults,storeTour, 2);
         storeResult(gameResults,storeTour, 3);
 
+
+        // Store this tournament results in a String for later viewing. This does not store individual scores.
         String matchFinalResult = "";
 
-        matchFinalResult = matchFinalResult.concat(nameAndResultToString(contenderList.getPlayer(), gameResults))
+        matchFinalResult = matchFinalResult
+                .concat(nameAndResultToString(contenderList.getPlayer(), gameResults))
                 .concat(nameAndResultToString(contenderList.getRandomPlayer(), gameResults))
-            .concat(nameAndResultToString(contenderList.getTimePlayer(), gameResults))
+                .concat(nameAndResultToString(contenderList.getTimePlayer(), gameResults))
                 .concat(nameAndResultToString(contenderList.getVocalPlayer(), gameResults));
-
 
         storeTour.setStoredMatchResult(matchFinalResult);
 
         return storeTour;
     }
 
+    /** Method that searches through a list of Strings and counts instances of a given name
+     * of a Player object */
     public static String nameAndResultToString(Player player, ArrayList<String> gameResults) {
-
         Pattern pattern = Pattern.compile(player.getName(), Pattern.CASE_INSENSITIVE);
-        long testSum = gameResults.stream().filter(word -> pattern.matcher(word).find()).count();
+        long testSum = gameResults
+                .stream()
+                .filter(word -> pattern.matcher(word)
+                        .find())
+                .count();
         String nameAndResult ="# " + player.getName() + " won " + testSum + " round(s) #\n";
         return nameAndResult;
     }
@@ -146,326 +153,41 @@ public class Tournament1 {
 
         for(int i = 0; i < firstPlace.size(); i++) {
             kevin1(firstPlace, i, user);
-            /*if(firstPlace.get(i).equals(user.getName())) {
-
-                user.setFirstPlace(user.getFirstPlace() + 1);
-                if(user.getBestPlace() == 1) {
-                    user.setBestPlaceCount(user.getBestPlaceCount() + 1);
-                }
-                if(1 < user.getBestPlace()) {
-                    user.setBestPlace(1);
-                    user.setBestPlaceCount(1);
-                }
-                if(user.getWorstPlace() == 1) {
-                    user.setWorstPlaceCount(user.getWorstPlaceCount() + 1);
-                }
-                if(1 > user.getWorstPlace()) {
-                    user.setWorstPlace(1);
-                    user.setWorstPlaceCount(1);
-                }
-            } */
             kevin1(firstPlace, i, random);
-            /*if(firstPlace.get(i).equals(random.getName())) {
-                random.setFirstPlace(random.getFirstPlace() + 1);
-                if(random.getBestPlace() == 1) {
-                    random.setBestPlaceCount(random.getBestPlaceCount() + 1);
-                }
-                if(1 < random.getBestPlace()) {
-                    random.setBestPlace(1);
-                    random.setBestPlaceCount(1);
-                }
-                if(random.getWorstPlace() == 1) {
-                    random.setWorstPlaceCount(random.getWorstPlaceCount() + 1);
-                }
-                if(1 > random.getWorstPlace()) {
-                    random.setWorstPlace(1);
-                    random.setWorstPlaceCount(1);
-                }
-            }*/
             kevin1(firstPlace, i, time);
-            /*if(firstPlace.get(i).equals(time.getName())) {
-                time.setFirstPlace(time.getFirstPlace() + 1);
-                if(time.getBestPlace() == 1) {
-                    time.setBestPlaceCount(time.getBestPlaceCount() + 1);
-                }
-                if(1 < time.getBestPlace()) {
-                    time.setBestPlace(1);
-                    time.setBestPlaceCount(1);
-                }
-                if(time.getWorstPlace() == 1) {
-                    time.setWorstPlaceCount(time.getWorstPlaceCount() + 1);
-                }
-                if(1 > time.getWorstPlace()) {
-                    time.setWorstPlace(1);
-                    time.setWorstPlaceCount(1);
-                }
-            }*/
             kevin1(firstPlace, i, vocal);
-
-             /*
-            if(firstPlace.get(i).equals(vocal.getName())) {
-                vocal.setFirstPlace(vocal.getFirstPlace() + 1);
-                if(vocal.getBestPlace() == 1) {
-                    vocal.setBestPlaceCount(vocal.getBestPlaceCount() + 1);
-                }
-                if(1 < vocal.getBestPlace()) {
-                    vocal.setBestPlace(1);
-                    vocal.setBestPlaceCount(1);
-                }
-                if(vocal.getWorstPlace() == 1) {
-                    vocal.setWorstPlaceCount(vocal.getWorstPlaceCount() + 1);
-                }
-                if(1 > vocal.getWorstPlace()) {
-                    vocal.setWorstPlace(1);
-                    vocal.setWorstPlaceCount(1);
-                }
-            }
-            */
 
         }
 
         for(int i = 0; i < secondPlace.size(); i++) {
             kevin2(secondPlace, i, user);
-            /*if(secondPlace.get(i).equals(user.getName())) {
-                user.setSecondPlace(user.getSecondPlace() + 1);
-                if(user.getBestPlace() == 2) {
-                    user.setBestPlaceCount(user.getBestPlaceCount() + 1);
-                }
-                if(2 < user.getBestPlace()) {
-                    user.setBestPlace(2);
-                    user.setBestPlaceCount(1);
-                }
-                if(user.getWorstPlace() == 2) {
-                    user.setWorstPlaceCount(user.getWorstPlaceCount() + 1);
-                }
-                if(2 > user.getWorstPlace()) {
-                    user.setWorstPlace(2);
-                    user.setWorstPlaceCount(1);
-                }
-            }*/
             kevin2(secondPlace, i, random);
-            /*if(secondPlace.get(i).equals(random.getName())) {
-                random.setSecondPlace(random.getSecondPlace() + 1);
-                if(random.getBestPlace() == 2) {
-                    random.setBestPlaceCount(random.getBestPlaceCount() + 1);
-                }
-                if(2 < random.getBestPlace()) {
-                    random.setBestPlace(2);
-                    random.setBestPlaceCount(1);
-                }
-                if(random.getWorstPlace() == 2) {
-                    random.setWorstPlaceCount(random.getWorstPlaceCount() + 1);
-                }
-                if(2 > random.getWorstPlace()) {
-                    random.setWorstPlace(2);
-                    random.setWorstPlaceCount(1);
-                }
-            }*/
             kevin2(secondPlace, i, time);
-            /*if(secondPlace.get(i).equals(time.getName())) {
-                time.setSecondPlace(time.getSecondPlace() + 1);
-                if(time.getBestPlace() == 2) {
-                    time.setBestPlaceCount(time.getBestPlaceCount() + 1);
-                }
-                if(2 < time.getBestPlace()) {
-                    time.setBestPlace(2);
-                    time.setBestPlaceCount(1);
-                }
-                if(time.getWorstPlace() == 2) {
-                    time.setWorstPlaceCount(time.getWorstPlaceCount() + 1);
-                }
-                if(2 > time.getWorstPlace()) {
-                    time.setWorstPlace(2);
-                    time.setWorstPlaceCount(1);
-                }
-            }*/
             kevin2(secondPlace, i, vocal);
-            /*if(secondPlace.get(i).equals(vocal.getName())) {
-                vocal.setSecondPlace(vocal.getSecondPlace() + 1);
-                if(vocal.getBestPlace() == 2) {
-                    vocal.setBestPlaceCount(vocal.getBestPlaceCount() + 1);
-                }
-                if(2 < vocal.getBestPlace()) {
-                    vocal.setBestPlace(2);
-                    vocal.setBestPlaceCount(1);
-                }
-                if(vocal.getWorstPlace() == 2) {
-                    vocal.setWorstPlaceCount(vocal.getWorstPlaceCount() + 1);
-                }
-                if(2 > vocal.getWorstPlace()) {
-                    vocal.setWorstPlace(2);
-                    vocal.setWorstPlaceCount(1);
-                }
-            }*/
+
         }
 
         for(int i = 0; i < thirdPlace.size(); i++) {
             kevin3(thirdPlace, i, user);
-            /*if(thirdPlace.get(i).equals(user.getName())) {
-                user.setThirdPlace(user.getThirdPlace() + 1);
-                if(user.getBestPlace() == 3) {
-                    user.setBestPlaceCount(user.getBestPlaceCount() + 1);
-                }
-                if(3 < user.getBestPlace()) {
-                    user.setBestPlace(3);
-                    user.setBestPlaceCount(1);
-                }
-                if(user.getWorstPlace() == 3) {
-                    user.setWorstPlaceCount(user.getWorstPlaceCount() + 1);
-                }
-                if(3 > user.getWorstPlace()) {
-                    user.setWorstPlace(3);
-                    user.setWorstPlaceCount(1);
-                }
-            }*/
             kevin3(thirdPlace, i , random);
-            /*if(thirdPlace.get(i).equals(random.getName())) {
-                random.setThirdPlace(random.getThirdPlace() + 1);
-                if(random.getBestPlace() == 3) {
-                    random.setBestPlaceCount(random.getBestPlaceCount() + 1);
-                }
-                if(3 < random.getBestPlace()) {
-                    random.setBestPlace(3);
-                    random.setBestPlaceCount(1);
-                }
-                if(random.getWorstPlace() == 3) {
-                    random.setWorstPlaceCount(random.getWorstPlaceCount() + 1);
-                }
-                if(3 > random.getWorstPlace()) {
-                    random.setWorstPlace(3);
-                    random.setWorstPlaceCount(1);
-                }
-            }*/
             kevin3(thirdPlace, i, time);
-            /*if(thirdPlace.get(i).equals(time.getName())) {
-                time.setThirdPlace(time.getThirdPlace() + 1);
-                if(time.getBestPlace() == 3) {
-                    time.setBestPlaceCount(time.getBestPlaceCount() + 1);
-                }
-                if(3 < time.getBestPlace()) {
-                    time.setBestPlace(3);
-                    time.setBestPlaceCount(1);
-                }
-                if(time.getWorstPlace() == 3) {
-                    time.setWorstPlaceCount(time.getWorstPlaceCount() + 1);
-                }
-                if(3 > time.getWorstPlace()) {
-                    time.setWorstPlace(3);
-                    time.setWorstPlaceCount(1);
-                }
-            }*/
             kevin3(thirdPlace, i, vocal);
-            /*if(thirdPlace.get(i).equals(vocal.getName())) {
-                vocal.setThirdPlace(vocal.getThirdPlace() + 1);
-                if(vocal.getBestPlace() == 3) {
-                    vocal.setBestPlaceCount(vocal.getBestPlaceCount() + 1);
-                }
-                if(3 < vocal.getBestPlace()) {
-                    vocal.setBestPlace(3);
-                    vocal.setBestPlaceCount(1);
-                }
-                if(vocal.getWorstPlace() == 3) {
-                    vocal.setWorstPlaceCount(vocal.getWorstPlaceCount() + 1);
-                }
-                if(3 > vocal.getWorstPlace()) {
-                    vocal.setWorstPlace(3);
-                    vocal.setWorstPlaceCount(1);
-                }
-            }*/
+
         }
 
         for(int i = 0; i < fourthPlace.size(); i++) {
             kevin4(fourthPlace, i, user);
-            /*
-            if(fourthPlace.get(i).equals(user.getName())) {
-                user.setFourthPlace(user.getFourthPlace() + 1);
-                if(user.getBestPlace() == 4) {
-                    user.setBestPlaceCount(user.getBestPlaceCount() + 1);
-                }
-                if(4 < user.getBestPlace()) {
-                    user.setBestPlace(4);
-                    user.setBestPlaceCount(1);
-                }
-                if(user.getWorstPlace() == 4) {
-                    user.setWorstPlaceCount(user.getWorstPlaceCount() + 1);
-                }
-                if(4 > user.getWorstPlace()) {
-                    user.setWorstPlace(4);
-                    user.setWorstPlaceCount(1);
-                }
-            }
-            */
-
             kevin4(fourthPlace, i, random);
-            /*
-            if(fourthPlace.get(i).equals(random.getName())) {
-                random.setFourthPlace(random.getFourthPlace() + 1);
-                if(random.getBestPlace() == 4) {
-                    random.setBestPlaceCount(random.getBestPlaceCount() + 1);
-                }
-                if(4 < random.getBestPlace()) {
-                    random.setBestPlace(4);
-                    random.setBestPlaceCount(1);
-                }
-                if(random.getWorstPlace() == 4) {
-                    random.setWorstPlaceCount(random.getWorstPlaceCount() + 1);
-                }
-                if(4 > random.getWorstPlace()) {
-                    random.setWorstPlace(4);
-                    random.setWorstPlaceCount(1);
-                }
-            }
-             */
-
             kevin4(fourthPlace, i, time);
-
-            /*
-            if(fourthPlace.get(i).equals(time.getName())) {
-                time.setFourthPlace(time.getFourthPlace() + 1);
-                if(time.getBestPlace() == 4) {
-                    time.setBestPlaceCount(time.getBestPlaceCount() + 1);
-                }
-                if(4 < time.getBestPlace()) {
-                    time.setBestPlace(4);
-                    time.setBestPlaceCount(1);
-                }
-                if(time.getWorstPlace() == 4) {
-                    time.setWorstPlaceCount(time.getWorstPlaceCount() + 1);
-                }
-                if(4 > time.getWorstPlace()) {
-                    time.setWorstPlace(4);
-                    time.setWorstPlaceCount(1);
-                }
-            }
-             */
-
             kevin4(fourthPlace, i, vocal);
-            /*
-            if(fourthPlace.get(i).equals(vocal.getName())) {
-                vocal.setFourthPlace(vocal.getFourthPlace() + 1);
-                if(vocal.getBestPlace() == 4) {
-                    vocal.setBestPlaceCount(vocal.getBestPlaceCount() + 1);
-                }
-                if(4 < vocal.getBestPlace()) {
-                    vocal.setBestPlace(4);
-                    vocal.setBestPlaceCount(1);
-                }
-                if(vocal.getWorstPlace() == 4) {
-                    vocal.setWorstPlaceCount(vocal.getWorstPlaceCount() + 1);
-                }
-                if(4 > vocal.getWorstPlace()) {
-                    vocal.setWorstPlace(4);
-                    vocal.setWorstPlaceCount(1);
-                }
-            }
-            */
+
         }
 
-
-        System.out.println(user.getRanking().toString());
-        System.out.println(random.getRanking().toString());
-        System.out.println(time.getRanking().toString());
-        System.out.println(vocal.getRanking().toString());
+        //Debugging only
+        //System.out.println(user.getRanking().toString());
+        //System.out.println(random.getRanking().toString());
+        //System.out.println(time.getRanking().toString());
+        //System.out.println(vocal.getRanking().toString());
 
         System.out.println(user.getName() + " Best Place: " + user.getRanking().getBestPlace() + ", Counter: " + user.getRanking().getBestPlaceCount());
         System.out.println(random.getName() + " Best Place: " + random.getRanking().getBestPlace() + ", Counter: " + random.getRanking().getBestPlaceCount());

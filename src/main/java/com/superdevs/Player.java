@@ -3,8 +3,8 @@ package com.superdevs;
 import java.util.Scanner;
 
 public class Player {
-    String name;
-    Ranking ranking;
+    private String name;
+    private Ranking ranking;
 
     public Player(String name) {
         this.name = name;
