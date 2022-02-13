@@ -113,10 +113,9 @@ public class Main {
     }
 
     public static void resultLatestGame(Results resultsList) {
-
         //Check if tournament played:
         if (resultsList.getStoredTour().size() == 0) {
-            System.out.println("No previous RPS tournaments played.");
+            System.out.println("Latest Game - No tournaments played yet!");
             return;
         }
         String time = resultsList
@@ -130,14 +129,6 @@ public class Main {
                 "Last tournament was played " + time + "\nResults: " + result + "!"
 
         );
-
-        /* resultsList
-                     .getStoredTour()
-                     .stream()
-                     .sorted(Comparator
-                             .comparing(StoredTour::getLocalDateTime).reversed())
-                     .limit(1)
-                     .toList()*/
     }
 
     /** Shows various statistics from Tournaments stored in a Results object
@@ -145,78 +136,11 @@ public class Main {
      * @param resultsList A Results object
      * @param index Integer corresponding to users in a Tournament
      * */
-    // TODO Fix OutOfBounds exception for index
-    public static void resultStatistics(Results resultsList, int index) {
-
-        DoubleSummaryStatistics showMeLife = resultsList
-                .getStoredTour()
-                .stream()
-                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
-                .limit(1)
-                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getFirstPlace())
-                .summaryStatistics();
-
-        DoubleSummaryStatistics showMeLife2 = resultsList
-                .getStoredTour()
-                .stream()
-                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
-                .limit(1)
-                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getSecondPlace())
-                .summaryStatistics();
-
-        DoubleSummaryStatistics showMeLife3 = resultsList
-                .getStoredTour()
-                .stream()
-                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
-                .limit(1)
-                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getThirdPlace())
-                .summaryStatistics();
-
-        DoubleSummaryStatistics showMeLife4 = resultsList
-                .getStoredTour()
-                .stream()
-                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
-                .limit(1)
-                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getFourthPlace())
-                .summaryStatistics();
-
-        System.out.println("getFirstPlace ###" + showMeLife);
-        System.out.println("getSecondPlace " + showMeLife2);
-        System.out.println("getThirdPlace " + showMeLife3);
-        System.out.println("getFourthPlace " + showMeLife4);
-
-        //  Programmet skall sedan kunna visa statistik om olika spelares snittplacering i turneringen,
-        //  bästa placering samt sämsta placering
-        // getCount() * 3 / getSum()
-        // Returnera lista?
-
-
-
-        // Kolla igenom en spelares poäng i varje turnering. Sammanställ
-
-        DoubleSummaryStatistics gonzo2 = resultsList
-                .getStoredTour()
-                .stream()
-                .mapToDouble(x -> x.getStoredUserList()
-                        .get(index)
-                        .getResult())
-                .summaryStatistics();
-
-        String name = resultsList
-                .getStoredTour()
-                .get(0)
-                .getStoredUserList()
-                .get(index).getName();
-
-        System.out.println(name + " " + gonzo2.getSum() + " getSum");
-
-        System.out.println(name + " " + gonzo2.getAverage() + " getAvg (getSum / getCount)");
-        System.out.println(name + " " + gonzo2.getMax() + " getMax");
-        System.out.println(name + " " + gonzo2.getMin() + " getMin");
-        System.out.println(name + " " + gonzo2.getCount() + " getCount");
-    }
-
     public static void resultStatistics2(Results resultsList, int index){
+        if (resultsList.getStoredTour().size() < 1) {
+            System.out.println("Stats - No tournaments played yet!");
+            return;
+        }
 
         // Bästa placering i tour
         System.out.println( "Best placement: " +
@@ -250,12 +174,11 @@ public class Main {
     }
 
     public static void averageScore(Results resultsList) {
-        //TODO Check for 0 if no tournament is played!!!
+
         int indexForAverageLatestGame = resultsList.getStoredTour().size()-1;
         int userIndex = 0;
         System.out.println("Average placement in Tours: " + Math.round(resultsList.getStoredTour().get(indexForAverageLatestGame).getStoredUserList().get(userIndex).getCombinedScore()));
     }
-
 
     public static void printTournaments() {
         System.out.println("Skiten funkar inte!!!");
@@ -308,6 +231,75 @@ public class Main {
 
         return Tournament1.results(contenderList, Tournament1.handleGameResults(contenderList, gameResults));
     }
+
+    /*// Deprecated method for statistics. Stored for review purpose.
+    public static void resultStatistics(Results resultsList, int index) {
+
+        DoubleSummaryStatistics showMeLife = resultsList
+                .getStoredTour()
+                .stream()
+                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
+                .limit(1)
+                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getFirstPlace())
+                .summaryStatistics();
+
+        DoubleSummaryStatistics showMeLife2 = resultsList
+                .getStoredTour()
+                .stream()
+                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
+                .limit(1)
+                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getSecondPlace())
+                .summaryStatistics();
+
+        DoubleSummaryStatistics showMeLife3 = resultsList
+                .getStoredTour()
+                .stream()
+                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
+                .limit(1)
+                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getThirdPlace())
+                .summaryStatistics();
+
+        DoubleSummaryStatistics showMeLife4 = resultsList
+                .getStoredTour()
+                .stream()
+                .sorted(Comparator.comparing(StoredTour::getLocalDateTime).reversed())
+                .limit(1)
+                .mapToDouble(x->x.getStoredUserList().get(0).getStoredRanking().getFourthPlace())
+                .summaryStatistics();
+
+        System.out.println("getFirstPlace ###" + showMeLife);
+        System.out.println("getSecondPlace " + showMeLife2);
+        System.out.println("getThirdPlace " + showMeLife3);
+        System.out.println("getFourthPlace " + showMeLife4);
+
+        //  Programmet skall sedan kunna visa statistik om olika spelares snittplacering i turneringen,
+        //  bästa placering samt sämsta placering
+        // getCount() * 3 / getSum()
+        // Returnera lista?
+
+        // Kolla igenom en spelares poäng i varje turnering. Sammanställ
+
+        DoubleSummaryStatistics gonzo2 = resultsList
+                .getStoredTour()
+                .stream()
+                .mapToDouble(x -> x.getStoredUserList()
+                        .get(index)
+                        .getResult())
+                .summaryStatistics();
+
+        String name = resultsList
+                .getStoredTour()
+                .get(0)
+                .getStoredUserList()
+                .get(index).getName();
+
+        System.out.println(name + " " + gonzo2.getSum() + " getSum");
+
+        System.out.println(name + " " + gonzo2.getAverage() + " getAvg (getSum / getCount)");
+        System.out.println(name + " " + gonzo2.getMax() + " getMax");
+        System.out.println(name + " " + gonzo2.getMin() + " getMin");
+        System.out.println(name + " " + gonzo2.getCount() + " getCount");
+    }*/
 
 
 

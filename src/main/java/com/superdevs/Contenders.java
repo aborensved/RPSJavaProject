@@ -1,8 +1,5 @@
 package com.superdevs;
 
-import java.util.ArrayList;
-
-
 /**
  * Class used to add all player classes as
  * objects to one object
