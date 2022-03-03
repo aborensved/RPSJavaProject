@@ -5,7 +5,8 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VocalPlayer extends Player implements MakeMove {
+public class VocalPlayer extends Player implements PunchLine {
+
 
     List<String> vokalWords = List.of("Det står att när de skulle göra pannkakor i fängelset använde de en fånge som smet",
             "Var kan man köpa kor billigast i världen? Korea.",
@@ -17,7 +18,7 @@ public class VocalPlayer extends Player implements MakeMove {
     List<String> randomMoves = List.of("Påse", "Sten", "Sax");
     Pattern vowels = Pattern.compile("[aeiou]", Pattern.CASE_INSENSITIVE);
 
-    public VocalPlayer(String name) {
+    protected VocalPlayer(String name) {
         super(name);
     }
 

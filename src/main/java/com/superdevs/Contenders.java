@@ -7,11 +7,11 @@ package com.superdevs;
 public class Contenders {
 
     private Player player;
-    private RandomPlayer randomPlayer;
-    private TimePlayer timePlayer;
-    private VocalPlayer vocalPlayer;
+    private Player randomPlayer;
+    private Player timePlayer;
+    private Player vocalPlayer;
 
-    public Contenders(Player player, RandomPlayer randomPlayer, TimePlayer timePlayer, VocalPlayer vocalPlayer) {
+    public Contenders(Player player, Player randomPlayer, Player timePlayer, Player vocalPlayer) {
         this.player = player;
         this.randomPlayer = randomPlayer;
         this.timePlayer = timePlayer;
@@ -22,32 +22,16 @@ public class Contenders {
         return player;
     }
 
-    public RandomPlayer getRandomPlayer() {
+    public Player getRandomPlayer() {
         return randomPlayer;
     }
 
-    public TimePlayer getTimePlayer() {
+    public Player getTimePlayer() {
         return timePlayer;
     }
 
-    public VocalPlayer getVocalPlayer() {
+    public Player getVocalPlayer() {
         return vocalPlayer;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public void setRandomPlayer(RandomPlayer randomPlayer) {
-        this.randomPlayer = randomPlayer;
-    }
-
-    public void setTimePlayer(TimePlayer timePlayer) {
-        this.timePlayer = timePlayer;
-    }
-
-    public void setVocalPlayer(VocalPlayer vocalPlayer) {
-        this.vocalPlayer = vocalPlayer;
     }
 
     @Override

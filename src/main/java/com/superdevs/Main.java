@@ -8,10 +8,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Creates CPU Opponents
-        RandomPlayer randomCPU = new RandomPlayer("Random");
-        TimePlayer timeCPU = new TimePlayer("Time");
-        VocalPlayer vocalCPU = new VocalPlayer("Vowel");
+        // create CPUPlayerFactory
+        CPUFactory cpuFactory = new CPUFactory();
+        // Creates CPU Opponents with Factory Pattern
+        Player randomCPU = cpuFactory.createCPU("Random");
+        Player timeCPU = cpuFactory.createCPU("Time");
+        Player vocalCPU = cpuFactory.createCPU("Vocal");
+
         Results results = new Results();
 
         // Takes player input for username

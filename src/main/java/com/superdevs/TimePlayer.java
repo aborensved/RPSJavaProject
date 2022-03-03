@@ -6,10 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 
-public class TimePlayer extends Player implements MakeMove {
+public class TimePlayer extends Player implements PunchLine {
 
-    LocalTime localTime = LocalTime.now(ZoneId.of("Europe/Paris"));
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss");
+    //LocalTime localTime = LocalTime.now(ZoneId.of("Europe/Paris"));
+    //DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss");
     List<String> timeWords = List.of("At the third stroke it will be 5 o' clock, my precious, said my brand new Tolkien clock.",
             "Around what time do most people visit the dentist? At tooth-hurty.",
             "Which animal always knows the time? A watch dog!",
@@ -19,7 +19,7 @@ public class TimePlayer extends Player implements MakeMove {
             "If you annoy the clock, it might just tick off!");
     List<String> randomMoves = List.of("Sax", "Sten", "Påse");
 
-    public TimePlayer(String name) {
+    protected TimePlayer(String name) {
         super(name);
     }
 

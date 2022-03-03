@@ -9,13 +9,12 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.ranking = new Ranking();
-
     }
 
     public String makeMove(Player user) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(
-                        "Välj Sten, Sax eller Påse: " +
+                "Välj Sten, Sax eller Påse: " +
                         "\n1) Sten" +
                         "\n2) Sax" +
                         "\n3) Påse"
@@ -56,10 +55,6 @@ public class Player {
 
     public Ranking getRanking() {
         return ranking;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public static void pause(int milliseconds) {

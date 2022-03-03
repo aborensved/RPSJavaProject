@@ -3,7 +3,7 @@ package com.superdevs;
 import java.util.List;
 import java.util.Random;
 
-public class RandomPlayer extends Player implements MakeMove {
+public class RandomPlayer extends Player implements PunchLine {
 
     List<String> randomWords = List.of("Kul, har vi nånsin haft kul?!",
             "Måste jag? Ja Rogge du måste!",
@@ -14,9 +14,8 @@ public class RandomPlayer extends Player implements MakeMove {
             "Tyngden på dalskidan, älskling.",
             "Gott snack.");
     List<String> randomMoves = List.of("Sten", "Sax", "Påse");
-    List<String> randomMoves2 = List.of("Sax", "Påse", "Sten");
 
-    public RandomPlayer(String name) {
+    protected RandomPlayer(String name) {
         super(name);
     }
 
@@ -33,13 +32,7 @@ public class RandomPlayer extends Player implements MakeMove {
 
     @Override
     public String randomMove(Player user) {
-        Random randomRandom = new Random();
-        int upperBound = randomMoves2.size() - 1;
-        int intRand = randomRandom.nextInt(upperBound);
-        pause(500);
-        System.out.println("Random used: " + randomMoves2.get(intRand));
-        System.out.println(punchLine());
-        return randomMoves2.get(intRand);
+        return makeMove(user);
     }
 
 
